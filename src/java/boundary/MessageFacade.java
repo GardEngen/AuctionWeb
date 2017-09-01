@@ -12,12 +12,12 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author raugz
+ * @author Gard
  */
 @Stateless
 public class MessageFacade extends AbstractFacade<Message> {
 
-    @PersistenceContext(unitName = "SimpleEE6AppPU")
+    @PersistenceContext(unitName = "persistence unit")
     private EntityManager em;
 
     @Override

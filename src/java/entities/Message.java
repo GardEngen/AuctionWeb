@@ -13,7 +13,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author raugz
+ * @author Gard
  */
 @Entity
 public class Message implements Serializable {
