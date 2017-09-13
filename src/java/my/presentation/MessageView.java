@@ -42,6 +42,10 @@ public class MessageView {
     public int getNumberOfMessages(){
        return messageFacade.findAll().size();
     }
+    
+    public String getAllMessages(){
+        return messageFacade.printMessages();
+    }
 
     // Saves the message and then returns the string "theend"
     public String postMessage(){

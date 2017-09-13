@@ -29,4 +29,11 @@ public class MessageFacade extends AbstractFacade<Message> {
         super(Message.class);
     }
     
+    public String printMessages(){
+       String out ="";
+       for(Message a : findAll()){
+           out += a.getMessage() + "; ";
+       }
+       return out;
+    }
 }
