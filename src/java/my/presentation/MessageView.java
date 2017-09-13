@@ -28,6 +28,7 @@ public class MessageView {
 
     /** Creates a new instance of MessageView */
     public MessageView() {
+       int i = 0; //test
        this.message = new Message();
     }
     
