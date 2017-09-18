@@ -29,4 +29,11 @@ public class UserFacade extends AbstractFacade<AuctionUser> {
         super(AuctionUser.class);
     }
     
+    public String printUserNames(){
+    String out ="";
+    for(AuctionUser a : findAll()){
+           out += a.getName()+ "; ";
+       }
+       return out;
+    }
 }
