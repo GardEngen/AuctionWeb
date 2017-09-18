@@ -13,6 +13,9 @@
             <h:commandButton action="#{MessageView.postMessage}" value="Post Message"/>
             
             <h:outputText value="#{MessageView.allMessages}"/>
+            
+            <h:outputLabel value="Username:"/><h:inputText value="#{userView.user.name}"/>
+            <h:commandButton action="#{userView.postUser}" value="Post User"/>
         </h:form>
     </f:view>
 </h:body>
