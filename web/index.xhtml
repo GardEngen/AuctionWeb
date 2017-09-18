@@ -13,14 +13,8 @@
             <h:commandButton action="#{productView.postProduct}" value="Post Product"/>
             
             <br/>
-            <h:outputLabel value="Username:"/>
-            <h:inputText value="#{userView.user.name}"/>
             
-            <h:outputLabel value="Password"/>
-            <h:inputText value="#{userView.user.password}"/>
-            <h:commandButton action="#{userView.postUser}" value="Post User"/>
-            
-            
+            <h:link value ="Register" outcome="register"/>
         </h:form>
     </f:view>
 </h:body>

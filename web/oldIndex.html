@@ -15,6 +15,11 @@
             <br/>
             <h:outputLabel value="Username:"/><h:inputText value="#{userView.user.name}"/>
             <h:commandButton action="#{userView.postUser}" value="Post User"/>
+            
+            <h:outputLabel value="Username:"/><h:inputText value="#{userView.user.name}"/>
+            <br/>
+            <h:outputLabel value="Password:"/><h:inputText value="#{userView.user.password"/>
+            <h:commandButton action="#{userView.postUser}" value="Register"/>
         </h:form>
     </f:view>
 </h:body>
