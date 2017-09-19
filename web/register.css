@@ -12,5 +12,9 @@ and open the template in the editor.
     width: 20%;
     position: fixed;
     top: 30%;
-    left: 40%
+    left: 40%;
+    padding: 2%;
+}
+.field{
+    float: right;
 }

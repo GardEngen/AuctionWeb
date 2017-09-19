@@ -16,18 +16,21 @@
                 </h:link>
                 
                 <div class="signupForm">
-                <br/>
-                <h:outputLabel value="Username:"/>
-                <h:inputText value="#{userView.user.name}"/>
-                <br/>
-                
-                <h:outputLabel value="Password"/>
-                <h:inputText value="#{userView.user.password}"/>
-                <br/>
-                
-                <h:outputLabel value="Repeat Password"/>
-                <h:inputText value="#{userView.user.password}"/>
-                <br/>
+                <div>
+                    <h:outputLabel value="Username:"/>
+                    <h:inputText class="field" value="#{userView.user.name}"/>
+                </div>
+                    
+                <div>
+                    <h:outputLabel value="Password:"/>
+                    <h:inputText class="field" value="#{userView.user.password}"/>
+                </div>
+
+                <div>
+                    <h:outputLabel value="Repeat Password:"/>
+                    <h:inputText class="field" value="#{userView.user.password}"/>
+                </div>
+
                 
                 <h:commandButton action="#{userView.postUser}" value="Register"/>
                 </div>
