@@ -36,5 +36,4 @@ public class ProductFacade extends AbstractFacade<Product> {
        }
        return out;
     }
-    
 }
