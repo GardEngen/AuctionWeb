@@ -31,8 +31,6 @@ public class MessageView {
        int i = 0; //test
        this.message = new Message();
     }
-    
-    
 
     // Calls getMessage to retrieve the message
     public Message getMessage() {
