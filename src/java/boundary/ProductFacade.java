@@ -30,10 +30,16 @@ public class ProductFacade extends AbstractFacade<Product> {
     }
     
     public String printProductNames(){
-            String out ="";
-    for(Product a : findAll()){
-           out += a.getName()+ "; ";
-       }
-       return out;
+        String out ="";
+        for(Product a : findAll()){
+           out += "Product: " + a.getName() + ", Sold by: " + a.getSeller() +
+                   ", for: " + a.getCurrentPrice() + "." + "<br/><br/>"  ;
+        }
+        return out;
+    }
+    
+    public String allProductInfo(){
+        String out = "";
+        return out;
     }
 }
