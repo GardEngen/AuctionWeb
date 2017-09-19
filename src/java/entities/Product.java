@@ -25,13 +25,35 @@ public class Product implements Serializable {
     private String name;
     private String seller;
     private String currentBuyer;
-    private int currentPrice;
+    private String description;
+    private String shipsTo;
+    private double currentPrice;
 
-    public int getCurrentPrice() {
+    public String getShipsTo() {
+        return shipsTo;
+    }
+
+    public void setShipsTo(String shipsTo) {
+        this.shipsTo = shipsTo;
+    }
+
+    
+    
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    
+    
+    public double getCurrentPrice() {
         return currentPrice;
     }
 
-    public void setCurrentPrice(int currentPrice) {
+    public void setCurrentPrice(double currentPrice) {
         this.currentPrice = currentPrice;
     }
     
