@@ -23,6 +23,34 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String seller;
+    private String currentBuyer;
+    private int currentPrice;
+
+    public int getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(int currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+    
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
+    }
+
+    public String getCurrentBuyer() {
+        return currentBuyer;
+    }
+
+    public void setCurrentBuyer(String currentBuyer) {
+        this.currentBuyer = currentBuyer;
+    }
 
     public String getName() {
         return name;

@@ -40,8 +40,9 @@ public class ProductView {
     }
     
     public String postProduct(){
+        product.setCurrentBuyer("");
         this.productFacade.create(product);
-        return "theend";
+        return "mainpage";
     }
 
     public Product getProduct() {
