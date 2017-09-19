@@ -17,4 +17,13 @@ and open the template in the editor.
 }
 .field{
     float: right;
+    width: 60%;
+}
+.inputField{
+    width: 100%;
+    padding: 1%
+}
+.textLabel{
+    width: 35%;
+    font-size: 0.7em;
 }
