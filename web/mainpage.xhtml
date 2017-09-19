@@ -6,17 +6,13 @@
     <h:head>
         <title>Facelet Title</title>
     </h:head>
-  <h:body>
-    Welcome
-    <f:view>
-        <!--
-        <h:form>
-            <h:outputLabel value="Search"/><h:inputText value="#{MessageView.message.message}"/>
-            <h:commandButton action="#{MessageView.postMessage}" value="Search"/>
-        </h:form>
-        -->
-        <h:outputText value="#{MainPageView.random}"
-    </f:view>
-    
+<h:body>
+    <h:form>
+        <h:inputText value="search" />
+    </h:form>
+    <br/><br/>
+    Here are some products on the page:
+    <br/>
+    <h:outputText value="#{productView.allProducts}"/>
 </h:body>
 </html>
