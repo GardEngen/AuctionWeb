@@ -34,6 +34,7 @@ public class MessageView {
 
     // Calls getMessage to retrieve the message
     public Message getMessage() {
+       //pointless comment
        return message;
     }
     

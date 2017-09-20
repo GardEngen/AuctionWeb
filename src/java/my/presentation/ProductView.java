@@ -41,7 +41,7 @@ public class ProductView {
     
     public String postProduct(){
         this.productFacade.create(product);
-        return "theend";
+        return "mainpage";
     }
 
     public Product getProduct() {
