@@ -14,7 +14,10 @@
             <h:outputLabel value="SellerName:"/><br/><h:inputText value="#{productView.product.seller}"/>
             <br/>
             <h:outputLabel value="Base Price:"/><br/><h:inputText value="#{productView.product.currentPrice}"/>
-            <br/>    
+            <br/>
+            <h:outputLabel value="Ships to: "/><br/><h:inputText value="#{productView.product.shipsTo}"/>
+            <br/>
+            <h:outputLabel value="Description:"/><br/><h:inputTextarea value="#{productView.product.description}"/>
             <h:commandButton action="#{productView.postProduct}" value="Post Product"/>
             <br/>
             <br/>
