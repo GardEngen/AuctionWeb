@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+    </h:head>
+  <h:body>
+    <f:view>
+        <h:form>
+            <h:outputLabel value="ProductName:"/><br/><h:inputText value="#{productView.product.name}"/>
+            <br/>
+            <h:outputLabel value="SellerName:"/><br/><h:inputText value="#{productView.product.seller}"/>
+            <br/>
+            <h:outputLabel value="Base Price:"/><br/><h:inputText value="#{productView.product.currentPrice}"/>
+            <br/>
+            <h:outputLabel value="Ships to: "/><br/><h:inputText value="#{productView.product.shipsTo}"/>
+            <br/>
+            <h:outputLabel value="Description:"/><br/><h:inputTextarea value="#{productView.product.description}"/>
+            <h:commandButton action="#{productView.postProduct}" value="Post Product"/>
+            <br/>
+            <br/>
+            <br/>
+            <h:link outcome="index">
+                    <button type="button" class="btn btn-lg btn-primary">Home</button>
+            </h:link>
+        </h:form>
+    </f:view>
+</h:body>
+</html>

@@ -28,13 +28,13 @@ public class MessageView {
 
     /** Creates a new instance of MessageView */
     public MessageView() {
+       int i = 0; //test
        this.message = new Message();
     }
-    
-    
 
     // Calls getMessage to retrieve the message
     public Message getMessage() {
+       //pointless comment
        return message;
     }
     

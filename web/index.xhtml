@@ -2,16 +2,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
     <h:head>
         <title>Facelet Title</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+        <link href="index.css" rel="stylesheet" type="text/css"/>
     </h:head>
-  <h:body>
-    <f:view>
-        <h:form>
-            <h:outputLabel value="Message:"/><h:inputText value="#{MessageView.message.message}"/>
-            <h:commandButton action="#{MessageView.postMessage}" value="Post Message"/>
-        </h:form>
-    </f:view>
-</h:body>
+    <h:body>
+        <f:view>
+            <div class="modal-dialog">
+
+                <div class="loginmodal-container">
+                    <h1>Login to Your Account</h1> <br/>
+
+                    <h:form>
+                        <h:outputLabel class="textLabel" value="Username:"/>
+                        <h:inputText class="login-form" a:placeholder="Username" value="#{login.username}"/>
+                        <h:outputLabel class="textLabel" value="Password:"/>
+                        <h:inputSecret class="login-form" a:placeholder="Password" value="#{login.password}" />
+                        <div class="login-buttons">
+                            <h:commandLink value="Sign in" styleClass="btn btn-lg btn-primary" actionListener="#{login.login()}"/>
+                            <h:link outcome="register">
+                                <button type="button" class="btn btn-lg btn-primary" > Register</button>
+                            </h:link>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+            <h:form>
+                <h:link outcome="index">
+                    <button type="button" class="btn btn-lg btn-primary">Home</button>
+                </h:link>
+                <br/>
+                <h:link outcome="registerproduct">
+                    <button type="button" class="btn btn-lg btn-primary">RegisterProduct</button>
+                </h:link>
+                <br/>
+                <h:outputLabel value="ProductName:"/><h:inputText value="#{productView.product.name}"/>
+                <h:commandButton action="#{productView.postProduct}" value="Post Product"/>
+                <br/>
+            </h:form>
+
+        </f:view>
+    </h:body>
 </html>
