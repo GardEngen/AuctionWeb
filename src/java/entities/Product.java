@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
@@ -21,14 +24,29 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long id;  
+    
+    //@ManyToOne(optional=false) 
+    //@JoinColumn(name="id", insertable=false, updatable=false)
+    private AuctionUser seller;
+    //private String seller;
+    
     private String name;
-    private String seller;
     private String currentBuyer;
     private String description;
     private String shipsTo;
     private double currentPrice;
 
+    public AuctionUser getSeller() {
+        return seller;
+    }
+
+    public void setSeller(AuctionUser seller) {
+        this.seller = seller;
+    }
+
+    
+    
     public String getShipsTo() {
         return shipsTo;
     }
@@ -55,15 +73,6 @@ public class Product implements Serializable {
 
     public void setCurrentPrice(double currentPrice) {
         this.currentPrice = currentPrice;
-    }
-    
-
-    public String getSeller() {
-        return seller;
-    }
-
-    public void setSeller(String seller) {
-        this.seller = seller;
     }
 
     public String getCurrentBuyer() {

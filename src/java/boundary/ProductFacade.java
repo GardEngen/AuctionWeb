@@ -5,7 +5,9 @@
  */
 package boundary;
 
+import entities.AuctionUser;
 import entities.Product;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,8 +34,8 @@ public class ProductFacade extends AbstractFacade<Product> {
     public String printProductNames(){
         String out ="";
         for(Product a : findAll()){
-           out += "Product: " + a.getName() + ", Sold by: " + a.getSeller() +
-                   ", for: " + a.getCurrentPrice() + "." + "<br/><br/>"  ;
+           out += "Product: " + a.getName() +
+                   ", for: " + a.getCurrentPrice() + "." + "<br/>" +a.getSeller().getName()  +"<br/>";
         }
         return out;
     }
@@ -41,5 +43,14 @@ public class ProductFacade extends AbstractFacade<Product> {
     public String allProductInfo(){
         String out = "";
         return out;
+    }
+
+    public void addUserToProduct(Product p) {
+       p.setSeller(findFirstUser());
+    }
+    
+    public AuctionUser findFirstUser() {
+        return (AuctionUser) em.createQuery(
+        "SELECT c FROM AuctionUser c").getResultList().get(0);
     }
 }

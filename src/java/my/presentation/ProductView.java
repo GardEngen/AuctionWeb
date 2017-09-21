@@ -40,6 +40,7 @@ public class ProductView {
     }
     
     public String postProduct(){
+        this.productFacade.addUserToProduct(this.product);
         this.productFacade.create(product);
         return "mainpage";
     }
