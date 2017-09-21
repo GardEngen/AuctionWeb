@@ -52,4 +52,14 @@ public class ProductView {
         public String getAllProducts(){
         return productFacade.printProductNames();
     }
+        
+    public String getProductName(){
+        return productFacade.printProductName(0);
+    }
+    public String getProductDescription(){
+        return productFacade.printDescription(0);
+    }
+    public String getProductPrice(){
+        return productFacade.printPrice(0);
+    }
 }

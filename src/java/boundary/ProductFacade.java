@@ -53,4 +53,32 @@ public class ProductFacade extends AbstractFacade<Product> {
         return (AuctionUser) em.createQuery(
         "SELECT c FROM AuctionUser c").getResultList().get(0);
     }
+    
+        
+    public String printProductName(int index){
+        String out = "";
+        List<Product> products= findAll();
+        if(products.size() > index){
+            out+=products.get(index).getName();
+        }
+        return out;
+    }
+    
+    public String printDescription(int index){
+        String out = "";
+        List<Product> products= findAll(); 
+        if(index < products.size()){
+            out += products.get(index).getDescription();
+        }
+        return out;
+    }
+    
+        public String printPrice(int index){
+        String out = "";
+        List<Product> products= findAll(); 
+        if(index < products.size()){
+            out += products.get(index).getCurrentPrice();
+        }
+        return out;
+    }
 }

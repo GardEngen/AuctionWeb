@@ -8,6 +8,7 @@ package entities;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +28,7 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;  
     
-    @ManyToOne(optional=false) 
+    @ManyToOne(fetch=FetchType.LAZY, optional=false) 
     @JoinColumn(name="SELLER", insertable=false, updatable=false)
     private AuctionUser seller;
     //private String seller;
