@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package my.presentation;
+package ManagedBeans;
 
-import boundary.ProductFacade;
-import entities.Product;
+import EnterpriseJavaBeans.ProductFacade;
+import Entities.Product;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
