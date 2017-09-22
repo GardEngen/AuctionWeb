@@ -21,7 +21,7 @@ import javax.enterprise.context.RequestScoped;
 public class UserView {
 
     @EJB
-    private UserFacade userFacade;
+        private UserFacade userFacade;
     private AuctionUser auctionUser;
 
     /**
@@ -45,6 +45,6 @@ public class UserView {
     
     public String postUser(){
         this.userFacade.create(auctionUser);
-        return "theend";
+        return "index";
     }
 }

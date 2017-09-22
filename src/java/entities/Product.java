@@ -7,6 +7,8 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,11 +27,11 @@ public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;  
     
-    @ManyToOne(fetch=FetchType.LAZY, optional=false) 
-    @JoinColumn(name="SELLER", insertable=false, updatable=false)
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="SELLER_ID")
     private AuctionUser seller;
     //private String seller;
     
@@ -43,12 +45,12 @@ public class Product implements Serializable {
         return seller;
     }
 
-    public void setSeller(AuctionUser seller) {
-        this.seller = seller;
+    
+    
+    public void setSeller(AuctionUser s) {
+        this.seller = s;
     }
 
-    
-    
     public String getShipsTo() {
         return shipsTo;
     }

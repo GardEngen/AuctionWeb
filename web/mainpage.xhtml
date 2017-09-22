@@ -17,12 +17,17 @@
     <div class="signupForm">
         <h:outputText  value="#{productView.productName}"/> 
         <br/>
-        Currently at:
-        <h:outputText value="#{productView.productPrice}"/>
-        kr
+        <br/>
+        <h:outputText  value="#{productView.productDescription}"/>
+        <br/>
         <br/>
         <div class="textLabel">
-            <h:outputText  value="#{productView.productDescription}"/>
+            Currently at:
+            <h:outputText value="#{productView.productPrice}"/>
+            kr
+            <br/>
+            Sold By:
+            <h:outputText  value="#{productView.productSeller}"/>
         </div>
     </div>
 </h:body>

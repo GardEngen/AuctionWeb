@@ -6,11 +6,16 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 /**
@@ -22,20 +27,37 @@ public class AuctionUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="USR_ID")
     private Long id;
     private String name;
     private String password;
         
-    @OneToMany(mappedBy="seller")
-    private List<Product> products;
+    @OneToMany(mappedBy="seller", cascade = CascadeType.PERSIST)
+    /*@JoinTable
+    (
+      name="USR_PRODUCTS",
+      joinColumns={ @JoinColumn(name="USR_ID", referencedColumnName="USR_ID") },
+      inverseJoinColumns={ @JoinColumn(name="PROD_ID", referencedColumnName="ID", unique=false) }
+    )*/
+    private List<Product> products = new ArrayList();
 
-    public List<Product> getProducts() {
-        return products;
+    public AuctionUser() {
     }
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+    
+    public List<Product> getProducts() {
+        return products;
+    }
+    
+    public void addProduct(Product p){
+        this.products.add(p);
+        if (p.getSeller() != this) {
+            p.setSeller(this);
+        }
     }
     
     public String getPassword() {

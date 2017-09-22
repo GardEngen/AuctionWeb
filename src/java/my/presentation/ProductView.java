@@ -40,8 +40,7 @@ public class ProductView {
     }
     
     public String postProduct(){
-        this.productFacade.addUserToProduct(this.product);
-        this.productFacade.create(product);
+        this.productFacade.create(product);  
         return "mainpage";
     }
 
@@ -61,5 +60,8 @@ public class ProductView {
     }
     public String getProductPrice(){
         return productFacade.printPrice(0);
+    }
+    public String getProductSeller(){
+        return productFacade.printSeller(0);
     }
 }

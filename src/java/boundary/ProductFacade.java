@@ -21,12 +21,24 @@ public class ProductFacade extends AbstractFacade<Product> {
 
     @PersistenceContext(unitName = "persistence unit")
     private EntityManager em;
+    
+    
+    
+    @Override
+    public void create(Product entity) {
+        addUserToProduct(entity);
+        getEntityManager().persist(entity);
+        if(!entity.getSeller().getProducts().contains(entity)){
+            entity.getSeller().getProducts().add(entity);
+        }
 
+    }
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
     public ProductFacade() {
         super(Product.class);
     }
@@ -46,12 +58,15 @@ public class ProductFacade extends AbstractFacade<Product> {
     }
 
     public void addUserToProduct(Product p) {
-       p.setSeller(findFirstUser());
+        AuctionUser u = findFirstUser();
+        if(!u.getProducts().contains(p))
+            p.setSeller(u);
     }
     
     public AuctionUser findFirstUser() {
-        return (AuctionUser) em.createQuery(
-        "SELECT c FROM AuctionUser c").getResultList().get(0);
+        List a = em.createQuery(
+        "SELECT c FROM AuctionUser c").getResultList();
+        return (AuctionUser) a.get(0);
     }
     
         
@@ -78,6 +93,14 @@ public class ProductFacade extends AbstractFacade<Product> {
         List<Product> products= findAll(); 
         if(index < products.size()){
             out += products.get(index).getCurrentPrice();
+        }
+        return out;
+    }
+    public String printSeller(int index){
+        String out = "";
+        List<Product> products= findAll(); 
+        if(index < products.size()){
+            out += products.get(index).getSeller().getName();
         }
         return out;
     }
