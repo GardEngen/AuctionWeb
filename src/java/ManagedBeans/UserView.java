@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -31,6 +32,12 @@ public class UserView {
         this.auctionUser = new AuctionUser();
     }
 
+    /*
+    public void getCurrentUser(){
+        String s = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+        System.out.println(s);
+    }
+    */
     public AuctionUser getUser() {
         return auctionUser;
     }
@@ -47,4 +54,11 @@ public class UserView {
         this.userFacade.create(auctionUser);
         return "theend";
     }
+    
+    /*
+    public void setUser(){
+        AuctionUser u = new AuctionUser(); // from db
+        auctionUser = u;
+    }
+*/
 }
