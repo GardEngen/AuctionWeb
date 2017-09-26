@@ -19,11 +19,11 @@
 
                     <h:form>
                         <h:outputLabel class="textLabel" value="Username:"/>
-                        <h:inputText class="login-form" a:placeholder="Username" value="#{login.username}"/>
+                        <h:inputText class="login-form" a:placeholder="Username" value="#{loginClient.userName}"/>
                         <h:outputLabel class="textLabel" value="Password:"/>
-                        <h:inputSecret class="login-form" a:placeholder="Password" value="#{login.password}" />
+                        <h:inputSecret class="login-form" a:placeholder="Password" value="#{loginClient.password}" />
                         <div class="login-buttons">
-                            <h:commandLink value="Sign in" styleClass="btn btn-lg btn-primary" actionListener="#{login.login()}"/>
+                            <h:commandLink value="Sign in" styleClass="btn btn-lg btn-primary" actionListener="#{loginClient.login()}"/>
                             <h:link outcome="register">
                                 <button type="button" class="btn btn-lg btn-primary" > Register</button>
                             </h:link>
@@ -31,6 +31,10 @@
                     </h:form>
                 </div>
             </div>
+                <br/>
+                <h:outputLabel class="textLabel" value="#{loginClient.user.name}"/>
+                <h:outputLabel class="textLabel" value="#{loginClient.user.password}"/>
+                <br/>
             <h:form>
                 <h:link outcome="index">
                     <button type="button" class="btn btn-lg btn-primary">Home</button>
