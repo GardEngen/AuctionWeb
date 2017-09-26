@@ -40,10 +40,23 @@ public class AuctionUser implements Serializable {
       inverseJoinColumns={ @JoinColumn(name="PROD_ID", referencedColumnName="ID", unique=false) }
     )*/
     private List<Product> products = new ArrayList();
+    
+    @OneToMany(mappedBy="buyer", cascade = CascadeType.PERSIST)
+    private List<Bid> bids = new ArrayList();
 
     public AuctionUser() {
     }
 
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
+
+    
+    
     public void setProducts(List<Product> products) {
         this.products = products;
     }

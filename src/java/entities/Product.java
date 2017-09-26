@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
@@ -36,10 +37,11 @@ public class Product implements Serializable {
     //private String seller;
     
     private String name;
-    private String currentBuyer;
     private String description;
     private String shipsTo;
-    private double currentPrice;
+    private double startingPrice;
+    @OneToOne(mappedBy="product")
+    private Bid currentBid;
 
     public AuctionUser getSeller() {
         return seller;
@@ -72,19 +74,11 @@ public class Product implements Serializable {
     
     
     public double getCurrentPrice() {
-        return currentPrice;
+        return startingPrice;
     }
 
     public void setCurrentPrice(double currentPrice) {
-        this.currentPrice = currentPrice;
-    }
-
-    public String getCurrentBuyer() {
-        return currentBuyer;
-    }
-
-    public void setCurrentBuyer(String currentBuyer) {
-        this.currentBuyer = currentBuyer;
+        this.startingPrice = currentPrice;
     }
 
     public String getName() {
