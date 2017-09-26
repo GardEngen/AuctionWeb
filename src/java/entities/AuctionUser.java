@@ -28,7 +28,6 @@ public class AuctionUser implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="USR_ID")
     private Long id;
     private String name;
     private String password;
@@ -37,7 +36,7 @@ public class AuctionUser implements Serializable {
     /*@JoinTable
     (
       name="USR_PRODUCTS",
-      joinColumns={ @JoinColumn(name="USR_ID", referencedColumnName="USR_ID") },
+      joinColumns={ @JoinColumn(name="ID", referencedColumnName="ID") },
       inverseJoinColumns={ @JoinColumn(name="PROD_ID", referencedColumnName="ID", unique=false) }
     )*/
     private List<Product> products = new ArrayList();
