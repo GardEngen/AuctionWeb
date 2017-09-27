@@ -5,6 +5,7 @@
  */
 package EnterpriseJavaBeans;
 
+import EnterpriseJavaBeans.AbstractFacade;
 import Entities.AuctionUser;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

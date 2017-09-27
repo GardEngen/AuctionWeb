@@ -6,7 +6,7 @@
 package ManagedBeans;
 
 
-import EnterpriseJaveBeans.UserFacade;
+import EnterpriseJavaBeans.UserFacade;
 
 import Entities.AuctionUser;
 import javax.ejb.EJB;

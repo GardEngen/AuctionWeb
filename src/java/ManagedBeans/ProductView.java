@@ -5,7 +5,7 @@
  */
 package ManagedBeans;
 
-import EnterpriseJaveBeans.ProductFacade;
+import EnterpriseJavaBeans.ProductFacade;
 
 import Entities.Product;
 import javax.ejb.EJB;

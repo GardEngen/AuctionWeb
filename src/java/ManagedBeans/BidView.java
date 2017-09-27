@@ -5,7 +5,7 @@
  */
 package ManagedBeans;
 
-import EnterpriseJaveBeans.BidFacade;
+import EnterpriseJavaBeans.BidFacade;
 import Entities.Bid;
 import javax.ejb.EJB;
 import javax.inject.Named;
