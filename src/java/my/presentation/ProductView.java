@@ -23,6 +23,7 @@ public class ProductView {
     @EJB
     private ProductFacade productFacade;
     private Product product;
+    private double bidVal = -1;
 
     public void setProduct(Product product) {
         this.product = product;
@@ -48,7 +49,7 @@ public class ProductView {
         return product;
     }
     
-        public String getAllProducts(){
+    public String getAllProducts(){
         return productFacade.printProductNames();
     }
         

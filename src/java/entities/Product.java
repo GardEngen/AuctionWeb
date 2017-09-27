@@ -40,14 +40,31 @@ public class Product implements Serializable {
     private String description;
     private String shipsTo;
     private double startingPrice;
-    @OneToOne(mappedBy="product")
+    @OneToOne(mappedBy="product", cascade = CascadeType.PERSIST)
     private Bid currentBid;
 
-    public AuctionUser getSeller() {
-        return seller;
+    public double getStartingPrice() {
+        return startingPrice;
+    }
+
+    public void setStartingPrice(double startingPrice) {
+        this.startingPrice = startingPrice;
+    }
+
+    public Bid getCurrentBid() {
+        return currentBid;
+    }
+
+    public void setCurrentBid(Bid currentBid) {
+        this.currentBid = currentBid;
     }
 
     
+    
+    
+    public AuctionUser getSeller() {
+        return seller;
+    }
     
     public void setSeller(AuctionUser s) {
         this.seller = s;
@@ -69,16 +86,6 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    
-    
-    public double getCurrentPrice() {
-        return startingPrice;
-    }
-
-    public void setCurrentPrice(double currentPrice) {
-        this.startingPrice = currentPrice;
     }
 
     public String getName() {

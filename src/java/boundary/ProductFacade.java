@@ -6,6 +6,7 @@
 package boundary;
 
 import entities.AuctionUser;
+import entities.Bid;
 import entities.Product;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -26,6 +27,10 @@ public class ProductFacade extends AbstractFacade<Product> {
     
     @Override
     public void create(Product entity) {
+        Bid b = new Bid();
+        b.setAmount((double) 0);
+        b.setProduct(entity);
+        entity.setCurrentBid(b);
         addUserToProduct(entity);
         getEntityManager().persist(entity);
         if(!entity.getSeller().getProducts().contains(entity)){
@@ -47,7 +52,7 @@ public class ProductFacade extends AbstractFacade<Product> {
         String out ="";
         for(Product a : findAll()){
            out += "Product: " + a.getName() +
-                   ", for: " + a.getCurrentPrice() + "." + "<br/>" +a.getSeller().getName()  +"<br/>";
+                   ", for: " + a.getStartingPrice() + "." + "<br/>" +a.getSeller().getName()  +"<br/>";
         }
         return out;
     }
@@ -92,7 +97,7 @@ public class ProductFacade extends AbstractFacade<Product> {
         String out = "";
         List<Product> products= findAll(); 
         if(index < products.size()){
-            out += products.get(index).getCurrentPrice();
+            out += products.get(index).getCurrentBid().getAmount();
         }
         return out;
     }
