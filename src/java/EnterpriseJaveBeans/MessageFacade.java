@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package boundary;
+package EnterpriseJaveBeans;
 
-import entities.Bid;
+import Entities.Message;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Åsmund
+ * @author Gard
  */
 @Stateless
-public class BidFacade extends AbstractFacade<Bid> {
+public class MessageFacade extends AbstractFacade<Message> {
 
     @PersistenceContext(unitName = "persistence unit")
     private EntityManager em;
@@ -25,14 +25,15 @@ public class BidFacade extends AbstractFacade<Bid> {
         return em;
     }
 
-    public BidFacade() {
-        super(Bid.class);
+    public MessageFacade() {
+        super(Message.class);
     }
     
-    public void bid(double amt, Bid bid){
-        Bid b = bid.getProduct().getCurrentBid();
-        if(bid.getProduct().getCurrentBid() != null){
-        }
+    public String printMessages(){
+       String out ="";
+       for(Message a : findAll()){
+           out += a.getMessage() + "; ";
+       }
+       return out;
     }
-    
 }

@@ -15,13 +15,28 @@
     </h:form>
 
     <div class="signupForm">
+
+        <div class="smallerForm">
         <h:outputText  value="#{productView.productName}"/> 
         <br/>
         <br/>
         <h:outputText  value="#{productView.productDescription}"/>
         <br/>
         <br/>
-        <div class="textLabel">
+            Currently at:
+            <h:outputText value="#{productView.productPrice}"/>
+            kr
+            <br/>
+            Sold By:
+            <h:outputText  value="#{productView.productSeller}"/>
+        </div>
+        <div class="smallerForm">
+        <h:outputText  value="#{productView.productName}"/> 
+        <br/>
+        <br/>
+        <h:outputText  value="#{productView.productDescription}"/>
+        <br/>
+        <br/>
             Currently at:
             <h:outputText value="#{productView.productPrice}"/>
             kr

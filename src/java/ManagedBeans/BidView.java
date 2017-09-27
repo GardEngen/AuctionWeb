@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package my.presentation;
+package ManagedBeans;
 
-import boundary.BidFacade;
-import entities.Bid;
+import EnterpriseJaveBeans.BidFacade;
+import Entities.Bid;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;

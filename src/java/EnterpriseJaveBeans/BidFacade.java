@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package boundary;
+package EnterpriseJaveBeans;
 
-import entities.AuctionUser;
+import Entities.Bid;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author raugz
+ * @author Åsmund
  */
 @Stateless
-public class UserFacade extends AbstractFacade<AuctionUser> {
+public class BidFacade extends AbstractFacade<Bid> {
 
     @PersistenceContext(unitName = "persistence unit")
     private EntityManager em;
@@ -25,15 +25,14 @@ public class UserFacade extends AbstractFacade<AuctionUser> {
         return em;
     }
 
-    public UserFacade() {
-        super(AuctionUser.class);
+    public BidFacade() {
+        super(Bid.class);
     }
     
-    public String printUserNames(){
-    String out ="";
-    for(AuctionUser a : findAll()){
-           out += a.getName()+ "; ";
-       }
-       return out;
+    public void bid(double amt, Bid bid){
+        Bid b = bid.getProduct().getCurrentBid();
+        if(bid.getProduct().getCurrentBid() != null){
+        }
     }
+    
 }

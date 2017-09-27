@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package boundary;
+package EnterpriseJaveBeans;
 
-import entities.AuctionUser;
-import entities.Bid;
-import entities.Product;
+import Entities.AuctionUser;
+import Entities.Bid;
+import Entities.Product;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
