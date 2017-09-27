@@ -27,6 +27,7 @@
                             <h:link outcome="register">
                                 <button type="button" class="btn btn-lg btn-primary" > Register</button>
                             </h:link>
+                            <h:outputLabel class="textLabel" value="#{loginClient.loginSuccessOutput}"/>
                         </div>
                     </h:form>
                 </div>
@@ -36,6 +37,8 @@
                 <h:outputLabel class="textLabel" value="#{loginClient.user.password}"/>
                 <br/>
             <h:form>
+                <h:commandButton class="btn btn-lg btn-primary" action="#{loginClient.logout}" value="Logout"/>
+                <br/>
                 <h:link outcome="index">
                     <button type="button" class="btn btn-lg btn-primary">Home</button>
                 </h:link>

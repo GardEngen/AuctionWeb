@@ -30,5 +30,11 @@ public class LoginBean implements LoginBeanRemote {
     public AuctionUser getLoggedInUser() {
         return user;
     }
+
+    @Override
+    public void logout() {
+        user.setName("");
+        user.setPassword("");
+    }
     
 }

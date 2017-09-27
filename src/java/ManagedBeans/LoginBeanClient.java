@@ -27,6 +27,7 @@ public class LoginBeanClient implements Serializable{
     
     private String userName;
     private String password;
+    private Boolean loggedIn = null;
 
     public String getUserName() {
         return userName;
@@ -55,8 +56,25 @@ public class LoginBeanClient implements Serializable{
     
     public void login(){
         //Todo options if authentication fails
-        serverBean.login(userName, password); // returns boolean value
+        loggedIn = serverBean.login(userName, password); // returns boolean value
     }
+    
+    public void logout(){
+        loggedIn = null;
+        serverBean.logout();
+    }
+
+    public String getLoginSuccessOutput() {
+        if(!(loggedIn == null)){
+            if(loggedIn){
+                return "Sucessful Login";
+            }
+            return "Invalid Credentials";
+        }
+        return "";
+    }
+    
+    
     
     
     /**

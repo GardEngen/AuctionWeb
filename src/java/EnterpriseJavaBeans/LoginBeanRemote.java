@@ -16,7 +16,8 @@ import javax.ejb.Remote;
 public interface LoginBeanRemote {
 
     Boolean login(String username, String password);
-    // unsure if necessary class
 
     AuctionUser getLoggedInUser();
+
+    public void logout();
 }
