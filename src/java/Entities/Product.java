@@ -90,15 +90,9 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-
-    public String getCurrentBuyer() {
-        return currentBuyer;
     }
 
-    public void setCurrentBuyer(String currentBuyer) {
-        this.currentBuyer = currentBuyer;
-
-    }
+ 
 
     public String getName() {
         return name;

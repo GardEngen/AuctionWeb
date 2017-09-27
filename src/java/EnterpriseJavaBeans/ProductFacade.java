@@ -33,7 +33,7 @@ public class ProductFacade extends AbstractFacade<Product> {
         String out ="";
         for(Product a : findAll()){
            out += "Product: " + a.getName() + ", Sold by: " + a.getSeller() +
-                   ", for: " + a.getCurrentPrice() + "." + "<br/><br/>"  ;
+                   ", for: " + a.getStartingPrice() + "." + "<br/><br/>"  ;
         }
         return out;
     }
