@@ -5,7 +5,9 @@
  */
 package ManagedBeans;
 
-import EnterpriseJavaBeans.MessageFacade;
+
+import EnterpriseJaveBeans.MessageFacade;
+
 import Entities.Message;
 import javax.ejb.EJB;
 import javax.inject.Named;

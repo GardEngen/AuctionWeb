@@ -1,3 +1,6 @@
 /nbproject/private/
 /build/
 /dist/
+src/conf/persistence.xml
+nbproject/project.properties
+nbproject/project.properties
