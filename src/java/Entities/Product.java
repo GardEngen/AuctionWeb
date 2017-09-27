@@ -6,6 +6,7 @@
 package Entities;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+
 
 /**
  *
@@ -57,10 +59,12 @@ public class Product implements Serializable {
 
     public void setCurrentBid(Bid currentBid) {
         this.currentBid = currentBid;
+
     }
 
     
     
+
     
     public AuctionUser getSeller() {
         return seller;
@@ -86,6 +90,14 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+
+    public String getCurrentBuyer() {
+        return currentBuyer;
+    }
+
+    public void setCurrentBuyer(String currentBuyer) {
+        this.currentBuyer = currentBuyer;
+
     }
 
     public String getName() {

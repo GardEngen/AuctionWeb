@@ -6,6 +6,7 @@
 package ManagedBeans;
 
 import EnterpriseJaveBeans.ProductFacade;
+
 import Entities.Product;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -23,6 +24,7 @@ public class ProductView {
     @EJB
     private ProductFacade productFacade;
     private Product product;
+
     private double bidVal = -1;
 
     public void setProduct(Product product) {
@@ -42,13 +44,13 @@ public class ProductView {
     
     public String postProduct(){
         this.productFacade.create(product);  
+
         return "mainpage";
     }
 
     public Product getProduct() {
         return product;
     }
-    
     public String getAllProducts(){
         return productFacade.printProductNames();
     }
@@ -65,4 +67,5 @@ public class ProductView {
     public String getProductSeller(){
         return productFacade.printSeller(0);
     }
+
 }
