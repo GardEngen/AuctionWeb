@@ -48,6 +48,7 @@ public class UserView {
     }
     
     public String postUser(){
+        this.auctionUser.setPassword(org.apache.commons.codec.digest.DigestUtils.sha256Hex(auctionUser.getPassword()));
         this.userFacade.create(auctionUser);
 
         return "index";
