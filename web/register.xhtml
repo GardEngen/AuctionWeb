@@ -28,12 +28,13 @@
                     
                 <div class = "inputField">
                     <h:outputLabel class="textLabel" value="Password:"/>
-                    <h:inputText class="field" value="#{userView.user.password}"/>
+                    <h:inputSecret class="field" value="#{userView.user.password}"/>
+                 
                 </div>
 
                 <div class = "inputField">
                     <h:outputLabel class="textLabel" value="Repeat Password:"/>
-                    <h:inputText class="field" value="#{userView.user.password}"/>
+                    <h:inputSecret class="field" value="#{userView.user.password}"/>
                 </div>
                     <h:commandButton action="#{userView.postUser}" class="btn btn-lg btn-success" value="Register"/>
                 </div>

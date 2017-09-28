@@ -9,6 +9,9 @@ import EnterpriseJavaBeans.LoginBean;
 import EnterpriseJavaBeans.LoginBeanRemote;
 import Entities.AuctionUser;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -27,6 +30,7 @@ public class LoginBeanClient implements Serializable{
     
     private String userName;
     private String password;
+    private Boolean loggedIn = null;
 
     public String getUserName() {
         return userName;
@@ -55,8 +59,28 @@ public class LoginBeanClient implements Serializable{
     
     public void login(){
         //Todo options if authentication fails
-        serverBean.login(userName, password); // returns boolean value
+     
+        String encryptedPassword = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
+        loggedIn = serverBean.login(userName, encryptedPassword); // returns boolean value
     }
+   
+    
+    public void logout(){
+        loggedIn = null;
+        serverBean.logout();
+    }
+
+    public String getLoginSuccessOutput() {
+        if(!(loggedIn == null)){
+            if(loggedIn){
+                return "Sucessful Login";
+            }
+            return "Invalid Credentials";
+        }
+        return "";
+    }
+    
+    
     
     
     /**
