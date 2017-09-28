@@ -10,7 +10,10 @@ import Entities.AuctionUser;
 import Entities.Bid;
 import Entities.Product;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -25,14 +28,23 @@ public class ProductFacade extends AbstractFacade<Product> {
     private EntityManager em;
     
     
-    
     @Override
     public void create(Product entity) {
+       LoginBeanRemote bean = null;
+       Context myCurretContex = null;
+       try{
+        myCurretContex = new InitialContext();
+        bean = (LoginBeanRemote)  myCurretContex.lookup("java:global/AuctionWeb/LoginBean!EnterpriseJavaBeans.LoginBeanRemote");
+       }catch(Exception e){
+               System.out.println(e.getMessage());
+       }
+       
         Bid b = new Bid();
         b.setAmount((double) 0);
         b.setProduct(entity);
         entity.setCurrentBid(b);
         addUserToProduct(entity);
+        //entity.setSeller(bean.getLoggedInUser());
         getEntityManager().persist(entity);
         if(!entity.getSeller().getProducts().contains(entity)){
             entity.getSeller().getProducts().add(entity);
@@ -47,6 +59,14 @@ public class ProductFacade extends AbstractFacade<Product> {
     
     public ProductFacade() {
         super(Product.class);
+    }
+    
+    public void updateBid(Product entity, double bidVal){
+       Bid theBid = entity.getCurrentBid();
+       if(theBid.getAmount() < bidVal){
+           theBid.setBuyer(findFirstUser());
+           theBid.setAmount(bidVal);
+       }
     }
     
     public String printProductNames(){

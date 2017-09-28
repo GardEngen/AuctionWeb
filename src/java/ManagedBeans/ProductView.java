@@ -21,6 +21,7 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class ProductView {
 
+
     @EJB
     private ProductFacade productFacade;
     private Product product;
@@ -66,6 +67,10 @@ public class ProductView {
     }
     public String getProductSeller(){
         return productFacade.printSeller(0);
+    }
+    
+    public void makeBid(){
+        productFacade.updateBid(this.product, bidVal);
     }
 
 }
