@@ -9,22 +9,12 @@
     </h:head>
 
   <h:body>
-    <f:view>
-        <h:form>
-            <h:outputLabel value="ProductName:"/><br/><h:inputText value="#{productView.product.name}"/>
-            <br/>
-            <h:outputLabel value="Base Price:"/><br/><h:inputText value="#{productView.product.startingPrice}"/>
-            <br/>
-            <h:outputLabel value="Ships to: "/><br/><h:inputText value="#{productView.product.shipsTo}"/>
-            <br/>
-            <h:outputLabel value="Description:"/><br/><h:inputTextarea value="#{productView.product.description}"/>
-            <h:commandButton action="#{productView.postProduct}" value="Post Product"/>
-            <br/>
-            <br/>
-            <br/>
-            <h:link outcome="index"/>
-              
-              </h:form>
-        </f:view>
-    </h:body>
+    <form action="registerProduct" method="post">  
+        Product Name:<input type="text" name="productName"/><br/><br/>  
+        Starting Price:<input type="number" name="startingPrice"/><br/><br/>
+        Ships to:<input type="text" name="shipsTo"/><br/><br/>
+        Product Description:<inputField type="text" name="description"/><br/><br/>  
+        <input type="submit" value="Register Product"/>  
+    </form>  
+  </h:body>
 </html>

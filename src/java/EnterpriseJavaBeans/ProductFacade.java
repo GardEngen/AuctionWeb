@@ -32,7 +32,7 @@ public class ProductFacade extends AbstractFacade<Product> {
         b.setAmount((double) 0);
         b.setProduct(entity);
         entity.setCurrentBid(b);
-        addUserToProduct(entity);
+        //addUserToProduct(entity);
         getEntityManager().persist(entity);
         if(!entity.getSeller().getProducts().contains(entity)){
             entity.getSeller().getProducts().add(entity);
