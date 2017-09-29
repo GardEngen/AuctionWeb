@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import EnterpriseJavaBeans.ProductFacade;
 import EnterpriseJavaBeans.UserFacade;
 import Entities.AuctionUser;
 import Entities.Product;
@@ -24,11 +25,16 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "Controller", urlPatterns = {"/Controller",
                                                 "/index",
-                                                "/register"})
+                                                "/register",
+                                                "/amIIn",
+                                                "/registerProduct"})
 public class Controller extends HttpServlet {
 
     @EJB
     private UserFacade userFacade;
+    
+    @EJB
+    private ProductFacade productFacade;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -98,12 +104,40 @@ public class Controller extends HttpServlet {
             
             userFacade.create(u);
             
+            session.setAttribute("user", u);
             try{
                 response.sendRedirect("/AuctionWeb");
             }catch(Exception e){
                 
             }
+        }
+        
+        if(userPath.equals("/amIIn")){
+            if(session.getAttribute("user") != null){
+                response.sendRedirect("/AuctionWeb/faces/register.xhtml");
+            }
+            else response.sendRedirect("/AuctionWeb/faces/registerproduct.xhtml");
+        }
+        
+        if(userPath.equals("/registerProduct")){
+            String name = request.getParameter("productName");
+            double startingPrice = Double.parseDouble(request.getParameter("startingPrice"));
+            String shipsTo = request.getParameter("shipsTo");
+            String description = request.getParameter("description");   
             
+            Product p = new Product();
+            
+            p.setDescription(description);
+            p.setName(name);
+            p.setShipsTo(shipsTo);
+            p.setStartingPrice(startingPrice);
+            
+            if(session.getAttribute("user") instanceof AuctionUser){
+                 p.setSeller((AuctionUser) session.getAttribute("user"));
+                 productFacade.create(p);
+            }
+            
+            response.sendRedirect("/AuctionWeb");
             
         }
        
