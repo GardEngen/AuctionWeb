@@ -136,7 +136,7 @@ public class Controller extends HttpServlet {
                  p.setSeller((AuctionUser) session.getAttribute("user"));
                  productFacade.create(p);
             }
-            
+
             response.sendRedirect("/AuctionWeb");
             
         }
