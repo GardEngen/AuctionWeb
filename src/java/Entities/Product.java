@@ -6,6 +6,8 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -17,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -42,9 +45,19 @@ public class Product implements Serializable {
     private String description;
     private String shipsTo;
     private double startingPrice;
-    @OneToOne(mappedBy="product", cascade = CascadeType.PERSIST)
-    private Bid currentBid;
+    @OneToMany(mappedBy="product", cascade = CascadeType.PERSIST)
+    private List<Bid> bids = new ArrayList<Bid>();
 
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
+
+    
+    
     public double getStartingPrice() {
         return startingPrice;
     }
@@ -52,18 +65,6 @@ public class Product implements Serializable {
     public void setStartingPrice(double startingPrice) {
         this.startingPrice = startingPrice;
     }
-
-    public Bid getCurrentBid() {
-        return currentBid;
-    }
-
-    public void setCurrentBid(Bid currentBid) {
-        this.currentBid = currentBid;
-
-    }
-
-    
-    
 
     
     public AuctionUser getSeller() {

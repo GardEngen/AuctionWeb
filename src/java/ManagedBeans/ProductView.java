@@ -5,25 +5,33 @@
  */
 package ManagedBeans;
 
+import EnterpriseJavaBeans.BidFacade;
+import EnterpriseJavaBeans.LoginBeanRemote;
 import EnterpriseJavaBeans.ProductFacade;
 
 import Entities.Product;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author raugz
  */
 @Named(value = "productView")
-@RequestScoped
-public class ProductView {
+@SessionScoped
+public class ProductView implements Serializable {
 
 
     @EJB
     private ProductFacade productFacade;
+    
+    @EJB
+    private LoginBeanRemote serverBean;
+    
     private Product product;
 
     private double bidVal = -1;
@@ -44,7 +52,8 @@ public class ProductView {
     }
     
     public String postProduct(){
-        this.productFacade.create(product);  
+        //System.out.println("severBean from productView: " + serverBean);
+        this.productFacade.create(product, serverBean.getLoggedInUser());  
 
         return "mainpage";
     }
@@ -69,8 +78,6 @@ public class ProductView {
         return productFacade.printSeller(0);
     }
     
-    public void makeBid(){
-        productFacade.updateBid(this.product, bidVal);
-    }
+
 
 }

@@ -12,9 +12,8 @@
 <h:body>
     <h:form>
         <h:inputText value="search" />
-    </h:form>
-
-    <div class="signupForm">
+        
+        <div class="signupForm">
 
         <div class="smallerForm">
         <h:outputText  value="#{productView.productName}"/> 
@@ -32,12 +31,15 @@
         </div>
         <div class = "inputField">
             <h:outputLabel class="textLabel" value="make Bid:"/>
-            <h:inputText class="field" value="#{ProductView.bidVal}"/>
+            <h:inputText class="field" value="#{productView.bidVal}"/>
         </div>
-        </div>
+        <div>
             <h:commandButton action="#{ProductView.makeBid}" class="btn btn-lg btn-success" value="Register"/>
         </div>
 
     </div>
+    </h:form>
+
+    
 </h:body>
 </html>

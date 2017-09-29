@@ -27,29 +27,49 @@ public class ProductFacade extends AbstractFacade<Product> {
     @PersistenceContext(unitName = "persistence unit")
     private EntityManager em;
     
+    @EJB
+    private LoginBeanRemote serverBean;
     
     @Override
     public void create(Product entity) {
-       LoginBeanRemote bean = null;
-       Context myCurretContex = null;
-       try{
-        myCurretContex = new InitialContext();
-        bean = (LoginBeanRemote)  myCurretContex.lookup("java:global/AuctionWeb/LoginBean!EnterpriseJavaBeans.LoginBeanRemote");
-       }catch(Exception e){
+        
+        if(serverBean.getLoggedInUser() == null){
+            System.out.println("It is null");
+        }
+        /*
+        LoginBeanRemote bean = null;
+        Context myCurretContex = null;
+        try{
+         myCurretContex = new InitialContext();
+         bean = (LoginBeanRemote)  myCurretContex.lookup("java:global/AuctionWeb/LoginBean!EnterpriseJavaBeans.LoginBeanRemote");
+        }catch(Exception e){
                System.out.println(e.getMessage());
-       }
-       
+        }
+        */
+        
+        /*
         Bid b = new Bid();
         b.setAmount((double) 0);
         b.setProduct(entity);
-        entity.setCurrentBid(b);
+        entity.getBids().add(b);
+        */
+        
         addUserToProduct(entity);
-        //entity.setSeller(bean.getLoggedInUser());
+        //entity.setSeller(serverBean.getLoggedInUser());
         getEntityManager().persist(entity);
         if(!entity.getSeller().getProducts().contains(entity)){
             entity.getSeller().getProducts().add(entity);
         }
 
+    }
+    
+    public void create(Product entity, AuctionUser u){
+        entity.setSeller(u);
+        //entity.setSeller(serverBean.getLoggedInUser());
+        getEntityManager().persist(entity);
+        if(!entity.getSeller().getProducts().contains(entity)){
+            entity.getSeller().getProducts().add(entity);
+        }   
     }
     
     @Override
@@ -61,14 +81,7 @@ public class ProductFacade extends AbstractFacade<Product> {
         super(Product.class);
     }
     
-    public void updateBid(Product entity, double bidVal){
-       Bid theBid = entity.getCurrentBid();
-       if(theBid.getAmount() < bidVal){
-           theBid.setBuyer(findFirstUser());
-           theBid.setAmount(bidVal);
-       }
-    }
-    
+
     public String printProductNames(){
         String out ="";
         for(Product a : findAll()){
@@ -118,7 +131,7 @@ public class ProductFacade extends AbstractFacade<Product> {
         String out = "";
         List<Product> products= findAll(); 
         if(index < products.size()){
-            out += products.get(index).getCurrentBid().getAmount();
+            //out += products.get(index).getCurrentBid().getAmount();
         }
         return out;
     }

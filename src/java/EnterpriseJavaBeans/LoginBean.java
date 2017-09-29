@@ -69,6 +69,7 @@ public class LoginBean extends AbstractFacade<AuctionUser> implements LoginBeanR
     private Boolean inputMatchesDBList(String usr, String pw, List<AuctionUser> l){
         for(AuctionUser u : l){
             if((u.getName().equals(usr)) && (u.getPassword().equals(pw))){
+                //System.out.println("Object id from Login Bean: "+ this);
                 user = u;
                 return true;
             }

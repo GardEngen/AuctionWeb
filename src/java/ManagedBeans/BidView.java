@@ -33,9 +33,6 @@ public class BidView {
     public BidView() {
     }
     
-    public void makeBid(){
-        bidFacade.bid(bidVal, bid);
-    }
 
 
 

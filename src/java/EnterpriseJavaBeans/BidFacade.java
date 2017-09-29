@@ -29,11 +29,5 @@ public class BidFacade extends AbstractFacade<Bid> {
     public BidFacade() {
         super(Bid.class);
     }
-    
-    public void bid(double amt, Bid bid){
-        Bid b = bid.getProduct().getCurrentBid();
-        if(bid.getProduct().getCurrentBid() != null){
-        }
-    }
-    
+
 }
