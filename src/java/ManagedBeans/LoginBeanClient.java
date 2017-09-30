@@ -6,7 +6,6 @@
 package ManagedBeans;
 
 import EnterpriseJavaBeans.LoginBean;
-import EnterpriseJavaBeans.LoginBeanRemote;
 import Entities.AuctionUser;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
@@ -26,7 +25,7 @@ import javax.enterprise.context.SessionScoped;
 public class LoginBeanClient implements Serializable{
 
     @EJB
-    private LoginBeanRemote serverBean;
+    private LoginBean serverBean;
     
     private String userName;
     private String password;
@@ -53,23 +52,15 @@ public class LoginBeanClient implements Serializable{
      * TODO somewhere check if user is logged on to avoid nullpointers
      * @return 
      */
-    public AuctionUser getUser() {
-        return serverBean.getLoggedInUser();
-    }
     
     public void login(){
         //Todo options if authentication fails
-        String encryptedPassword = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
-        loggedIn = serverBean.login(userName, encryptedPassword); // returns boolean value
+        //String encryptedPassword = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
+        loggedIn = serverBean.login(userName, password); // returns boolean value
         //userName = serverBean.getLoggedInUser().getName();
         //password = serverBean.getLoggedInUser().getPassword();
     }
    
-    
-    public void logout(){
-        loggedIn = null;
-        serverBean.logout();
-    }
 
     public String getLoginSuccessOutput() {
         if(!(loggedIn == null)){

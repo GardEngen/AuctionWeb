@@ -8,6 +8,7 @@ package EnterpriseJavaBeans;
 import Entities.AuctionUser;
 import java.util.List;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -16,9 +17,8 @@ import javax.persistence.Query;
  *
  * @author raugz
  */
-@Stateful
-public class LoginBean extends AbstractFacade<AuctionUser> implements LoginBeanRemote {
-    private AuctionUser user;
+@Stateless
+public class LoginBean extends AbstractFacade<AuctionUser>{
 
     public LoginBean() {
         super(AuctionUser.class);
@@ -29,32 +29,13 @@ public class LoginBean extends AbstractFacade<AuctionUser> implements LoginBeanR
     private EntityManager em;
     
 
-    @Override
     public Boolean login(String username, String password) {
-        //TODO checks on info from db etc
         if(inputMatchesDBList(username, password, dbQueryAllUsers())){
             return true;
         }
         else{
             return false;
         }
-        /*
-        user = new AuctionUser();
-        user.setName(username);
-        user.setPassword(password);
-        return true;
-        */
-    }
-
-    @Override
-    public AuctionUser getLoggedInUser() {
-        return user;
-    }
-
-    @Override
-    public void logout() {
-        user.setName("");
-        user.setPassword("");
     }
 
     @Override
@@ -69,7 +50,6 @@ public class LoginBean extends AbstractFacade<AuctionUser> implements LoginBeanR
     private Boolean inputMatchesDBList(String usr, String pw, List<AuctionUser> l){
         for(AuctionUser u : l){
             if((u.getName().equals(usr)) && (u.getPassword().equals(pw))){
-                user = u;
                 return true;
             }
         }
