@@ -23,11 +23,12 @@ import javax.servlet.http.HttpSession;
  *
  * @author Åsmund
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller",
-                                                "/index",
-                                                "/register",
-                                                "/amIIn",
-                                                "/registerProduct"})
+@WebServlet(name = "Controller",
+            urlPatterns = {"/Controller",
+                            "/index",
+                            "/register",
+                            "/amIIn",
+                            "/registerProduct"})
 public class Controller extends HttpServlet {
 
     @EJB
