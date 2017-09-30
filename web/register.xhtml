@@ -8,10 +8,42 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
         <link href="register.css" rel="stylesheet" type="text/css"/>
     </h:head>
-        <form action="register" method="post">  
-        Name:<input type="text" name="username"/><br/><br/>  
-        Password:<input type="password" name="userpass"/><br/><br/>  
-        <input type="submit" value="register"/>  
-        </form>  
+    <f:view>
+        <h:form>
+            <h:body>
+                <h:link outcome="index">
+                    <button type="button" class="btn btn-lg btn-primary">Home</button>
+                </h:link>
+
+                <br/>
+                <form action="register" method="post">  
+                    Name:<input type="text" name="username"/><br/><br/>  
+                    Password:<input type="password" name="userpass"/><br/><br/>  
+                    <input type="submit" value="register"/>  
+                </form>
+
+                <br/>
+
+                <div class="signupForm">
+                    <form action="register" method="post">
+                        <div class = "inputField">
+                            Name:<input type="text" name="username"/><br/><br/>  
+                        </div>
+
+                        <div class = "inputField">
+                            Password:<input type="password" name="userpass"/><br/><br/>
+                        </div>
+
+                        <div class = "inputField">
+                            Password:<input type="password" name="userpass"/><br/><br/>  
+                        </div>
+                        <input type="submit" value="register"/>  
+                    </form>
+                </div>
+
+
+            </h:body>
+        </h:form>
+    </f:view>
 </html>
 
