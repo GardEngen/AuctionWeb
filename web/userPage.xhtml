@@ -5,7 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
-        <title>User #{userView.thisUser}</title>
+        <title>User ${user.name}</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
         <link href="navBar.css" rel="stylesheet" type="text/css"/>
     </h:head>
@@ -42,11 +42,12 @@
                 <div class="media">
                     <img class="d-flex mr-3" data-src="holder.js/64x64" alt="64x64" style="width: 160px; height: 160px;" src="https://i.redd.it/omdxvq5q4khz.jpg" data-holder-rendered="true"></img>
                     <div class="media-body">
-                        <h5 class="mt-0">#{userView.thisUser}
+                        <h5 class="mt-0" value=""> 
                         </h5>
                         DOTHRAKI HORDES IN AN OPEN FIELD, NED!
                     </div>
                 </div>
+                <h:outputLabel value="${user.name}"/>
                 <div class="row">
                     <div class="col">
                         1 of 2

@@ -11,9 +11,7 @@
         <link href="index.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
-        <form action="amIIn" method="post">  
-        <input type="submit" value="login"/>  
-        </form>  
+        <h:outputLabel class="textLabel" value="Logged in as: ${user.name}"/>
         
         <f:view>
             <div class="modal-dialog">
@@ -36,15 +34,14 @@
                     </h:form>
                 </div>
             </div>
-                <br/>
-                <h:outputLabel class="textLabel" value="#{loginClient.user.name}"/>
-                <h:outputLabel class="textLabel" value="#{loginClient.user.password}"/>
-                <br/>
             <h:form>
-                <h:commandButton class="btn btn-lg btn-primary" action="#{loginClient.logout}" value="Logout"/>
+                <h:commandButton class="btn btn-lg btn-primary" value="Logout"/>
                 <br/>
                 <h:link outcome="index">
                     <button type="button" class="btn btn-lg btn-primary">Home</button>
+                </h:link>
+                <h:link outcome="userPage">
+                    <button type="button" class="btn btn-lg btn-primary">Profile</button>
                 </h:link>
                 <br/>
                 <h:link outcome="registerproduct">

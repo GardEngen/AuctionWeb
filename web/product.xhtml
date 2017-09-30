@@ -21,7 +21,7 @@
                                  style="width: 100%; height: 100%"/>
                         </div>
                         <div class="currentBid">
-                            <h:outputLabel class="textLabel" value="PHCurrentBid"/>
+                            <h:outputLabel class="textLabel" value="${selectedProduct.startingPrice}"/>
                         </div>
                     </div>
                     <div class="rightDiv">
@@ -29,7 +29,7 @@
                             <h:outputLabel class="textLabel" value="${selectedProduct.name}"/>
                         </div>
                         <div class="description">
-                            <h:outputLabel class="textLabel" value="PHDescription"/>
+                            <h:outputLabel class="textLabel" value="${selectedProduct.description}"/>
                         </div>
 
                         <form action="bid" method="post">
