@@ -89,12 +89,14 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession();
 
         if(userPath.equals("/search")){
-            
+           System.out.println("------------------------------------------------");
            String productID = request.getParameter("productID");
            
-           //session.setAttribute("Product", productFacade.find(productID));
-           productView.setProduct(productFacade.find(productID));
-           response.sendRedirect("productPage");
+           session.setAttribute("selectedProduct", productFacade.find(Long.parseLong(productID)));
+           
+           
+           //productView.setProduct(productFacade.find(Long.parseLong(productID)));
+           response.sendRedirect("/AuctionWeb/faces/product.xhtml");
            
            
            /* List<Product> searchResult;
