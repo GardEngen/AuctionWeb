@@ -10,70 +10,67 @@
     </h:head>
 
     <h:body>
-            <div class="container-fluid">
-                <div class="row main">
-                    <div class="col-md-12">
-                        <div class=" text-center">
-                            <h2>
-                                Register product
-                            </h2>
-                        </div>
+        <div class="container">
+            <h2>Products:</h2>
 
-                        <div class="main-register main-center">
-                            <form  action="registerProduct" method="post">
-                                
-                                <div class="form-group">
+            <div class="row main">
+                <div class="col-md-12">
 
-                                    <label for="productName" class="cols-sm-2 control-label">
-                                        Product Name:
-                                    </label>
-                                    <div class="cols-sm-10">
-                                        <div class="input-group"></div>
-                                        <input type="text" name="productName"  class="form-control" placeholder="Enter product name"/>
-                                    </div>
+                    <div class="main-register main-center">
+                        <form  action="registerProduct" method="post">
+
+                            <div class="form-group">
+
+                                <label for="productName" class="cols-sm-2 control-label">
+                                    Product Name:
+                                </label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group"></div>
+                                    <input type="text" name="productName"  class="form-control" placeholder="Enter product name"/>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="startingPrice" class="cols-sm-2 control-label">
-                                        Starting Price:
-                                    </label>
-                                    <div class="cols-sm-10">
-                                        <div class="input-group"></div>
-                                        <input type="number" name="startingPrice"  class="form-control" placeholder="Enter a starting price"/>
-                                    </div>
-                                </div>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="shipsTo" class="cols-sm-2 control-label">
-                                        Starting Price:
-                                    </label>
-                                    <div class="cols-sm-10">
-                                        <div class="input-group"></div>
-                                        <input type="text" name="shipsTo"  class="form-control" placeholder="Ships to where?"/>
-                                    </div>
+                            <div class="form-group">
+                                <label for="startingPrice" class="cols-sm-2 control-label">
+                                    Starting Price:
+                                </label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group"></div>
+                                    <input type="number" name="startingPrice"  class="form-control" placeholder="Enter a starting price"/>
                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="shipsTo" class="cols-sm-2 control-label">
+                                    Starting Price:
+                                </label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group"></div>
+                                    <input type="text" name="shipsTo"  class="form-control" placeholder="Ships to where?"/>
+                                </div>
+                            </div>
 
 
-                                <div class="form-group">
-                                    <label for="description" class="cols-sm-2 control-label">
-                                        Starting Price:
-                                    </label>
-                                    <div class="cols-sm-10">
-                                        <div class="input-group"></div>
-                                        <input type="text" name="description"  class="form-control" placeholder="Enter a description"/>
-                                    </div>
+                            <div class="form-group">
+                                <label for="description" class="cols-sm-2 control-label">
+                                    Starting Price:
+                                </label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group"></div>
+                                    <input type="text" name="description"  class="form-control" placeholder="Enter a description"/>
                                 </div>
+                            </div>
 
-                                <div class="col-md text-center">
-                                    <button type="submit" value="registerProduct" class="btn btn-success">
-                                        Submit
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="col-md text-center">
+                                <button type="submit" value="registerProduct" class="btn btn-success">
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-    
+        </div>
+
     </h:body>
 </html>

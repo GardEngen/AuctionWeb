@@ -1,7 +1,4 @@
-@import url('http://getbootstrap.com/dist/css/bootstrap.css');
- html, body, .container-table {
-    height: 100%;
-}
+
 .main-center{
  	margin-top: 30px;
  	margin: 0 auto;
