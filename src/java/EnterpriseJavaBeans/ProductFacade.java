@@ -28,10 +28,6 @@ public class ProductFacade extends AbstractFacade<Product> {
     
     @Override
     public void create(Product entity) {
-        Bid b = new Bid();
-        b.setAmount((double) 0);
-        b.setProduct(entity);
-        entity.setCurrentBid(b);
         //addUserToProduct(entity);
         getEntityManager().persist(entity);
         if(!entity.getSeller().getProducts().contains(entity)){
@@ -98,7 +94,7 @@ public class ProductFacade extends AbstractFacade<Product> {
         String out = "";
         List<Product> products= findAll(); 
         if(index < products.size()){
-            out += products.get(index).getCurrentBid().getAmount();
+            out += "";
         }
         return out;
     }

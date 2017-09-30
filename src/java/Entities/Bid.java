@@ -30,7 +30,7 @@ public class Bid implements Serializable {
     @JoinColumn(name="BUYER_ID")
     private AuctionUser buyer;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="PRODUCT_ID")
     private Product product;
     
