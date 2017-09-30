@@ -9,6 +9,7 @@ import EnterpriseJavaBeans.AbstractFacade;
 import Entities.AuctionUser;
 import Entities.Bid;
 import Entities.Product;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -109,5 +110,23 @@ public class ProductFacade extends AbstractFacade<Product> {
             out += products.get(index).getSeller().getName();
         }
         return out;
+    }
+    
+        public List<Product> searchForProduct(String searchObject) {
+        System.out.println("itemname:: " + searchObject);
+
+        List<Product> listOfAllProducts = findAll();
+        List<Product> resultList = new ArrayList();
+        for (Product tempProd : listOfAllProducts) {
+
+            if (tempProd.getName().toLowerCase().contains(searchObject.toLowerCase())) {
+                System.out.println("********Jeg legger til " + tempProd.getName());
+                resultList.add(tempProd);
+            }
+        }
+//        for (Product tempProd : resultList) {
+//            System.out.println("products in result " + tempProd.getName());
+//        }
+        return resultList;
     }
 }
