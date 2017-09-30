@@ -42,10 +42,9 @@ and open the template in the editor.
                             <tr>
 
                                 <td>
-                                <form action="search" method="get">  
-                                    <out value ="${product.id}" name ="productID"/>
+                                
                                 <h:outputLabel class="textLabel" value="#{product.name}"/>
-                                </form>
+
                                 </td>
                                 <td>
                                     <h:outputLabel class="textLabel" value="#{product.shipsTo}"/>
@@ -54,10 +53,11 @@ and open the template in the editor.
                                     <h:outputLabel class="textLabel" value="#{product.description}"/>
                                 </td>
                                 <th>
+                                        <form action="search" method="get">
+                                        <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
+                                        </button>   
+                                        </form>
 
-                                    <h:link outcome="product">
-                                        <button type="button" class="btn btn-primary " value="#{product.id}">Go To!</button>
-                                    </h:link>
                                 </th>
                             </tr>
                         </ui:repeat>

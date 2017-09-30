@@ -27,9 +27,9 @@ public class ProductView {
 
     private double bidVal = -1;
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+        public void setProduct(Product product) {
+            this.product = product;
+        }
 
     /**
      * Creates a new instance of ProductView
