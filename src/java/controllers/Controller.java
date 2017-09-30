@@ -9,9 +9,13 @@ import EnterpriseJavaBeans.ProductFacade;
 import EnterpriseJavaBeans.UserFacade;
 import Entities.AuctionUser;
 import Entities.Product;
+import ManagedBeans.ProductView;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.SessionBean;
+import javax.faces.bean.ManagedProperty;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +32,8 @@ import javax.servlet.http.HttpSession;
                             "/index",
                             "/register",
                             "/amIIn",
-                            "/registerProduct"})
+                            "/registerProduct",
+                            "/search"})
 public class Controller extends HttpServlet {
 
     @EJB
@@ -36,6 +41,10 @@ public class Controller extends HttpServlet {
     
     @EJB
     private ProductFacade productFacade;
+    
+    @ManagedProperty(value="#{productView}")
+    ProductView productView;
+    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -75,7 +84,31 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String userPath = request.getServletPath();
+        HttpSession session = request.getSession();
+
+        if(userPath.equals("/search")){
+            
+           String productID = request.getParameter("productID");
+           
+           //session.setAttribute("Product", productFacade.find(productID));
+           productView.setProduct(productFacade.find(productID));
+           response.sendRedirect("productPage");
+           
+           
+           /* List<Product> searchResult;
+            
+            String itemName = request.getParameter("searchVal");
+        
+            if( productFacade.searchForProduct(itemName).isEmpty()){
+                response.sendRedirect("/AuctionWeb");
+            } else {
+                searchResult = productFacade.searchForProduct(itemName);
+                session.setAttribute("searchList", searchResult);
+                response.sendRedirect("listProducts");
+            }*/
+        }
     }
 
     /**
@@ -154,4 +187,7 @@ public class Controller extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    
+
+    
 }
