@@ -32,11 +32,19 @@ and open the template in the editor.
                     </thead>
                     <tbody>
 
-
+                                <form action="register" method="post">  
+                                    Name:<input type="text" name="username"/><br/><br/>  
+                                    Password:<input type="password" name="userpass"/><br/><br/>  
+                                    <input type="submit" value="register"/>  
+                                </form>
+                        
                         <ui:repeat value="#{searchBean.result}" var="product">
                             <tr>
+
                                 <td>
+                                
                                 <h:outputLabel class="textLabel" value="#{product.name}"/>
+
                                 </td>
                                 <td>
                                     <h:outputLabel class="textLabel" value="#{product.shipsTo}"/>
@@ -45,9 +53,11 @@ and open the template in the editor.
                                     <h:outputLabel class="textLabel" value="#{product.description}"/>
                                 </td>
                                 <th>
-                                    <h:link outcome="product">
-                                        <button type="button" class="btn btn-primary " value="#{product.id}">Go To!</button>
-                                    </h:link>
+                                        <form action="search" method="get">
+                                        <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
+                                        </button>   
+                                        </form>
+
                                 </th>
                             </tr>
                         </ui:repeat>
