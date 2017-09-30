@@ -57,9 +57,9 @@
                 <h:link outcome="userPage">
                     <button type="button" class="btn btn-lg btn-primary">Profile</button>
                 </h:link>
-                <br/>
-                <h:outputLabel value="ProductName:"/><h:inputText value="#{productView.product.name}"/>
-                <h:commandButton action="#{productView.postProduct}" value="Post Product"/>
+                <br/> 
+                <h:inputText class="login-form" a:placeholder="Search:" value="#{searchBean.itemName}"/>
+                <h:commandButton action="#{searchBean.searchForProduct()}" value="Submit"/>
                 <br/>
             </h:form>
 
