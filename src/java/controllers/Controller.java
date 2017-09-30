@@ -198,6 +198,12 @@ public class Controller extends HttpServlet {
         if(userPath.equals("/login")){
             //TODO
         }
+        
+        if(userPath.equals("/logout")){
+            session.removeAttribute("user");
+            response.sendRedirect("/AuctionWeb");
+        }
+        
     }
 
     /**
