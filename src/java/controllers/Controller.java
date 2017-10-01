@@ -5,9 +5,11 @@
  */
 package controllers;
 
+import EnterpriseJavaBeans.BidFacade;
 import EnterpriseJavaBeans.ProductFacade;
 import EnterpriseJavaBeans.UserFacade;
 import Entities.AuctionUser;
+import Entities.Bid;
 import Entities.Product;
 import ManagedBeans.ProductView;
 import java.io.IOException;
@@ -33,7 +35,9 @@ import javax.servlet.http.HttpSession;
                             "/register",
                             "/amIIn",
                             "/registerProduct",
-                            "/search"})
+                            "/search",
+                            "/makeBid",
+                            "/login"})
 public class Controller extends HttpServlet {
 
     @EJB
@@ -42,8 +46,10 @@ public class Controller extends HttpServlet {
     @EJB
     private ProductFacade productFacade;
     
-    @ManagedProperty(value="#{productView}")
-    ProductView productView;
+    @EJB
+    private BidFacade bidFacade;
+    
+
     
     
     /**
@@ -176,7 +182,28 @@ public class Controller extends HttpServlet {
             response.sendRedirect("/AuctionWeb");
             
         }
-       
+        
+        if(userPath.equals("/makeBid")){
+            Bid b = new Bid(); 
+            
+            b.setAmount(Double.parseDouble(request.getParameter("amount")));
+            b.setProduct((Product)session.getAttribute("selectedProduct"));
+            b.setBuyer((AuctionUser) session.getAttribute("user"));
+            
+            bidFacade.create(b);
+            
+           response.sendRedirect("/AuctionWeb/faces/product.xhtml");
+        }
+        
+        if(userPath.equals("/login")){
+            //TODO
+        }
+        
+        if(userPath.equals("/logout")){
+            session.removeAttribute("user");
+            response.sendRedirect("/AuctionWeb");
+        }
+        
     }
 
     /**
