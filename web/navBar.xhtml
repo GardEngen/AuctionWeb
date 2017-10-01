@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html    xmlns:h="http://xmlns.jcp.org/jsf/html"
+         xmlns:f="http://xmlns.jcp.org/jsf/core"
+         xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-expand-lg navbar-light bg-light">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="mainpage.xhtml">Home</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="userPage.xhtml">Profile</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="registerproduct.xhtml">Register Product</a>
+                </li>
+            </ul>
+
+            <h:form class="form-inline my-2 my-lg-0">
+                <div class="searchbarLimits">
+                    <h:inputText class="form-control mr-sm-2" a:placeholder="Search" value="#{searchBean.itemName}"/>
+                </div>
+                <h:commandButton action="#{searchBean.searchForProduct()}"  class="btn btn-outline-success my-2 my-sm-0" value="Submit"/>
+            </h:form>
+        </nav>
+    </body>
+</html>
