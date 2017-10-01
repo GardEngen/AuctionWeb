@@ -30,6 +30,7 @@ public class ProductFacade extends AbstractFacade<Product> {
     @Override
     public void create(Product entity) {
         //addUserToProduct(entity);
+
         getEntityManager().persist(entity);
         if(!entity.getSeller().getProducts().contains(entity)){
             entity.getSeller().getProducts().add(entity);

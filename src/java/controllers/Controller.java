@@ -175,20 +175,38 @@ public class Controller extends HttpServlet {
             p.setStartingPrice(startingPrice);
             
             if(session.getAttribute("user") instanceof AuctionUser){
-                 p.setSeller((AuctionUser) session.getAttribute("user"));
+                AuctionUser u =  (AuctionUser) session.getAttribute("user");
+                p.setSeller(u);
+                 
+                if(!p.getSeller().getProducts().contains(p)){
+                    p.getSeller().getProducts().add(p);
+                }
+
                  productFacade.create(p);
             }
 
             response.sendRedirect("/AuctionWeb");
             
         }
-        
+        System.out.println(userPath);
         if(userPath.equals("/makeBid")){
+            
+            System.out.println("Thing Thing Thing Thing Thing ");
+            
             Bid b = new Bid(); 
             
             b.setAmount(Double.parseDouble(request.getParameter("amount")));
             b.setProduct((Product)session.getAttribute("selectedProduct"));
             b.setBuyer((AuctionUser) session.getAttribute("user"));
+            
+            //warning: slow for users with many bids!
+            if(!b.getBuyer().getBids().contains(b)){
+                b.getBuyer().getBids().add(b);
+            }
+            
+            if(!b.getProduct().getBids().contains(b)){
+                b.getProduct().getBids().add(b);
+            }
             
             bidFacade.create(b);
             

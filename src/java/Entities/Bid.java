@@ -50,6 +50,7 @@ public class Bid implements Serializable {
 
     public void setProduct(Product product) {
         this.product = product;
+        
     }
 
     public Double getAmount() {
