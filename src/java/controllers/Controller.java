@@ -220,8 +220,12 @@ public class Controller extends HttpServlet {
         }
 
         if(userPath.equals("/logout")){
+            //session.invalidate();
+            System.out.println("----------------------------in logout--------------------");
+            
             session.removeAttribute("user");
             response.sendRedirect("/AuctionWeb");
+            //response.sendRedirect("/AuctionWeb/faces/registerproduct.xhtml");
         }
         
     }
