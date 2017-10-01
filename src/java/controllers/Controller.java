@@ -193,24 +193,33 @@ public class Controller extends HttpServlet {
             
             System.out.println("Thing Thing Thing Thing Thing ");
             
-            Bid b = new Bid(); 
+            double amount = Double.parseDouble(request.getParameter("amount"));
+            Product product = (Product)session.getAttribute("selectedProduct");
             
-            b.setAmount(Double.parseDouble(request.getParameter("amount")));
-            b.setProduct((Product)session.getAttribute("selectedProduct"));
-            b.setBuyer((AuctionUser) session.getAttribute("user"));
             
-            //warning: slow for users with many bids!
-            if(!b.getBuyer().getBids().contains(b)){
-                b.getBuyer().getBids().add(b);
+            if(product.getStartingPrice() < amount){
+            
+                Bid b = new Bid(); 
+            
+                b.setAmount(amount);
+                b.setProduct(product);
+                b.setBuyer((AuctionUser) session.getAttribute("user"));
+            
+                bidFacade.create(b);
+                
+                //warning: slow for users with many bids!
+                if(!b.getBuyer().getBids().contains(b)){
+                    b.getBuyer().getBids().add(b);
+                }
+            
+                if(!b.getProduct().getBids().contains(b)){
+                    b.getProduct().getBids().add(b);
+                }
+                
+                product.setStartingPrice(amount);
             }
-            
-            if(!b.getProduct().getBids().contains(b)){
-                b.getProduct().getBids().add(b);
-            }
-            
-            bidFacade.create(b);
-            
-           response.sendRedirect("/AuctionWeb/faces/product.xhtml");
+           
+            response.sendRedirect("/AuctionWeb/faces/product.xhtml");
         }
         
         if(userPath.equals("/login")){
