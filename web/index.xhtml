@@ -19,19 +19,19 @@
                 <div class="loginmodal-container">
                     <h1>Login to Your Account</h1> <br/>
 
-                    <h:form>
+                    <form action ="login" method="post">
                         <h:outputLabel class="textLabel" value="Username:"/>
-                        <h:inputText class="login-form" a:placeholder="Username" value="#{loginClient.userName}"/>
+                        <input class="login-form" a:placeholder="Username" type ="text" name="username"/>
                         <h:outputLabel class="textLabel" value="Password:"/>
-                        <h:inputSecret class="login-form" a:placeholder="Password" value="#{loginClient.password}" />
+                        <input class="login-form" a:placeholder="Password" type="password" name="userpass" />
                         <div class="login-buttons">
-                            <h:commandLink value="Sign in" styleClass="btn btn-lg btn-primary" actionListener="#{loginClient.login()}"/>
+                            <input styleClass="btn btn-lg btn-primary" type="submit" value="login"/>  
                             <h:link outcome="register">
                                 <button type="button" class="btn btn-lg btn-primary" > Register</button>
                             </h:link>
                             <h:outputLabel class="textLabel" value="#{loginClient.loginSuccessOutput}"/>
                         </div>
-                    </h:form>
+                    </form>
                 </div>
             </div>
             <h:form>
