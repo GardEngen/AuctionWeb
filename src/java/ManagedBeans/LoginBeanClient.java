@@ -53,6 +53,7 @@ public class LoginBeanClient implements Serializable{
      * @return 
      */
     
+    /*
     public void login(){
         //Todo options if authentication fails
         //String encryptedPassword = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
@@ -60,6 +61,7 @@ public class LoginBeanClient implements Serializable{
         //userName = serverBean.getLoggedInUser().getName();
         //password = serverBean.getLoggedInUser().getPassword();
     }
+    */
    
 
     public String getLoginSuccessOutput() {
