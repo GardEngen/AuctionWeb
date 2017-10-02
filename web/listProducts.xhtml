@@ -15,10 +15,9 @@ and open the template in the editor.
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
+      <ui:include src="/navBar.xhtml" />   
     <body>
         <f:view>
-
-
             <div class="container">
                 <h2>Products:</h2>
 
@@ -27,36 +26,35 @@ and open the template in the editor.
                         <tr>
                             <th>Name</th>
                             <th>Ships to</th>
-                            <th>Description</th>
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <form action="register" method="post">  
+                            Name:<input type="text" name="username"/><br/><br/>  
+                            Password:<input type="password" name="userpass"/><br/><br/>  
+                            <input type="submit" value="register"/>  
+                        </form>
 
-                                <form action="register" method="post">  
-                                    Name:<input type="text" name="username"/><br/><br/>  
-                                    Password:<input type="password" name="userpass"/><br/><br/>  
-                                    <input type="submit" value="register"/>  
-                                </form>
-                        
                         <ui:repeat value="#{searchBean.result}" var="product">
                             <tr>
 
                                 <td>
-                                
-                                <h:outputLabel class="textLabel" value="#{product.name}"/>
+
+                                    <h:outputLabel class="textLabel" value="#{product.name}"/>
 
                                 </td>
                                 <td>
                                     <h:outputLabel class="textLabel" value="#{product.shipsTo}"/>
                                 </td>
                                 <td>
-                                    <h:outputLabel class="textLabel" value="#{product.description}"/>
+                                    <h:outputLabel class="textLabel" value="#{product.startingPrice}"/>
                                 </td>
                                 <th>
-                                        <form action="search" method="get">
+                                    <form action="search" method="get">
                                         <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
                                         </button>   
-                                        </form>
+                                    </form>
 
                                 </th>
                             </tr>

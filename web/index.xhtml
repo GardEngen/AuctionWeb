@@ -3,13 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:head>
         <title>Facelet Title</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
         <link href="index.css" rel="stylesheet" type="text/css"/>
     </h:head>
+    <ui:include src="/navBar.xhtml" />  
     <h:body>
         <h:outputLabel class="textLabel" value="Logged in as: ${user.name}"/>
         
@@ -54,10 +56,7 @@
                 <h:link outcome="userPage">
                     <button type="button" class="btn btn-lg btn-primary">Profile</button>
                 </h:link>
-                <br/> 
-                <h:inputText class="login-form" a:placeholder="Search:" value="#{searchBean.itemName}"/>
-                <h:commandButton action="#{searchBean.searchForProduct()}" value="Submit"/>
-                <br/>
+            
             </h:form>
 
         </f:view>
