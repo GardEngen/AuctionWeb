@@ -219,13 +219,14 @@ public class Controller extends HttpServlet {
             }
         }
 
-        if(userPath.equals("/logout")){
-            //session.invalidate();
+        if(userPath.equals("/logout")) {
             System.out.println("----------------------------in logout--------------------");
-            
-            session.removeAttribute("user");
-            response.sendRedirect("/AuctionWeb");
-            //response.sendRedirect("/AuctionWeb/faces/registerproduct.xhtml");
+            if (session.getAttribute("user") != null) {
+                //session.invalidate();
+                session.removeAttribute("user");
+                response.sendRedirect("/AuctionWeb");
+                //response.sendRedirect("/AuctionWeb/faces/registerproduct.xhtml");
+            }
         }
         
     }
