@@ -6,6 +6,7 @@
 package controllers;
 
 import EnterpriseJavaBeans.BidFacade;
+import EnterpriseJavaBeans.LoginBean;
 import EnterpriseJavaBeans.ProductFacade;
 import EnterpriseJavaBeans.UserFacade;
 import Entities.AuctionUser;
@@ -45,6 +46,9 @@ public class Controller extends HttpServlet {
     
     @EJB
     private ProductFacade productFacade;
+    
+    @EJB
+    private LoginBean loginBean;
     
     @EJB
     private BidFacade bidFacade;
@@ -225,12 +229,33 @@ public class Controller extends HttpServlet {
         }
         
         if(userPath.equals("/login")){
-            //TODO
+            String name = request.getParameter("username");
+            String password = request.getParameter("userpass");
+            
+            AuctionUser u = loginBean.login(name, password);
+            if(u == null){
+                //TODO send "invalid login" to somewhere on client?
+                boolean loginSuccess = false;
+                session.setAttribute("loginSuccess", loginSuccess);
+            }
+            else {
+                session.setAttribute("user", u);
+                try {
+                    response.sendRedirect("/AuctionWeb");
+                } catch (Exception e) {
+
+                }
+            }
         }
-        
-        if(userPath.equals("/logout")){
-            session.removeAttribute("user");
-            response.sendRedirect("/AuctionWeb");
+
+        if(userPath.equals("/logout")) {
+            System.out.println("----------------------------in logout--------------------");
+            if (session.getAttribute("user") != null) {
+                //session.invalidate();
+                session.removeAttribute("user");
+                response.sendRedirect("/AuctionWeb");
+                //response.sendRedirect("/AuctionWeb/faces/registerproduct.xhtml");
+            }
         }
         
     }

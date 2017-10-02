@@ -28,7 +28,7 @@ public class ProductFacade extends AbstractFacade<Product> {
     
     public void merge(Product p){
         em.merge(p);
-    }
+    }   
     
     @Override
     public void create(Product entity) {

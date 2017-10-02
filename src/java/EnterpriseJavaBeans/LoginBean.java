@@ -23,18 +23,19 @@ public class LoginBean extends AbstractFacade<AuctionUser>{
     public LoginBean() {
         super(AuctionUser.class);
     }
+    private AuctionUser currentUser;
     
     // or use em from UserFacade?
     @PersistenceContext(unitName = "persistence unit")
     private EntityManager em;
     
 
-    public Boolean login(String username, String password) {
+    public AuctionUser login(String username, String password) {
         if(inputMatchesDBList(username, password, dbQueryAllUsers())){
-            return true;
+            return currentUser;
         }
         else{
-            return false;
+            return null;
         }
     }
 
@@ -50,6 +51,7 @@ public class LoginBean extends AbstractFacade<AuctionUser>{
     private Boolean inputMatchesDBList(String usr, String pw, List<AuctionUser> l){
         for(AuctionUser u : l){
             if((u.getName().equals(usr)) && (u.getPassword().equals(pw))){
+                currentUser = u;
                 return true;
             }
         }

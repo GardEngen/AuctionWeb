@@ -6,6 +6,7 @@
 package Entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +48,26 @@ public class Product implements Serializable {
     private double startingPrice;
     @OneToMany(mappedBy="product", cascade = CascadeType.PERSIST)
     private List<Bid> bids = new ArrayList<Bid>();
+    private boolean isPublished;
+    private Date expirationDate;
+
+    public boolean isIsPublished() {
+        return isPublished;
+    }
+
+    public void setIsPublished(boolean isPublished) {
+        this.isPublished = isPublished;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+    
+    
 
     public List<Bid> getBids() {
         return bids;
