@@ -167,6 +167,12 @@ public class Controller extends HttpServlet {
         }
         
         if(userPath.equals("/registerProduct")){
+            //only logged on users can create products
+            if(session.getAttribute("user") == null){
+                response.sendError(401);
+                return;
+            }
+            
             String name = request.getParameter("productName");
             String startingPrice = request.getParameter("startingPrice");
             String shipsTo = request.getParameter("shipsTo");
@@ -208,6 +214,11 @@ public class Controller extends HttpServlet {
         System.out.println(userPath);
         if(userPath.equals("/makeBid")){
             
+            //only logged on users can make Bids
+            if(session.getAttribute("user") == null){
+                response.sendError(401);
+                return;
+            }
             
             double amount = Double.parseDouble(request.getParameter("amount"));
             Product product = (Product)session.getAttribute("selectedProduct");
