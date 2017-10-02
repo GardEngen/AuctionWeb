@@ -12,8 +12,9 @@
     </h:head>
 
     <f:view>
-        <h:form>
-              <ui:include src="/navBar.xhtml" />   
+
+        
+            <ui:include src="/navBar.xhtml" />   
             <h:body>
                 <div class="productDisplay">
                     <div class="leftDiv">
@@ -23,7 +24,7 @@
                                  style="width: 100%; height: 100%"/>
                         </div>
                         <div class="currentBid">
-                            <h:outputLabel class="textLabel" value="PHCurrentBid"/>
+                            <h:outputLabel class="textLabel" value="${selectedProduct.startingPrice}"/>
                         </div>
                     </div>
                     <div class="rightDiv">
@@ -31,18 +32,19 @@
                             <h:outputLabel class="textLabel" value="${selectedProduct.name}"/>
                         </div>
                         <div class="description">
-                            <h:outputLabel class="textLabel" value="PHDescription"/>
+                            <h:outputLabel class="textLabel" value="${selectedProduct.description}"/>
                         </div>
 
                         
+                        <form action="makeBid" method="post">
                         <div class="newBid">
-                            <h:inputText class="" a:placeholder="" value="New bid"/>
+                            <input a:placeholder="" type="number" name="amount"/>
                         </div>
-
 
                         <div class="submit">
-                            <h:commandButton class="btn btn-lg btn-success" value="Submit"/>
+                            <input type="submit" class="btn btn-lg btn-success" value="Submit"/>
                         </div>
+                        </form>
                     </div>
                     <div class="botDiv">
 
@@ -52,7 +54,6 @@
                     </div>
                 </div>
             </h:body>
-        </h:form>
     </f:view>
 
 </html>

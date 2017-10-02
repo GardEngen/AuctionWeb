@@ -5,9 +5,11 @@
  */
 package controllers;
 
+import EnterpriseJavaBeans.BidFacade;
 import EnterpriseJavaBeans.ProductFacade;
 import EnterpriseJavaBeans.UserFacade;
 import Entities.AuctionUser;
+import Entities.Bid;
 import Entities.Product;
 import ManagedBeans.ProductView;
 import java.io.IOException;
@@ -33,7 +35,9 @@ import javax.servlet.http.HttpSession;
                             "/register",
                             "/amIIn",
                             "/registerProduct",
-                            "/search"})
+                            "/search",
+                            "/makeBid",
+                            "/login"})
 public class Controller extends HttpServlet {
 
     @EJB
@@ -42,8 +46,10 @@ public class Controller extends HttpServlet {
     @EJB
     private ProductFacade productFacade;
     
-    @ManagedProperty(value="#{productView}")
-    ProductView productView;
+    @EJB
+    private BidFacade bidFacade;
+    
+
     
     
     /**
@@ -169,14 +175,62 @@ public class Controller extends HttpServlet {
             p.setStartingPrice(startingPrice);
             
             if(session.getAttribute("user") instanceof AuctionUser){
-                 p.setSeller((AuctionUser) session.getAttribute("user"));
+                AuctionUser u =  (AuctionUser) session.getAttribute("user");
+                p.setSeller(u);
+                 
+                if(!p.getSeller().getProducts().contains(p)){
+                    p.getSeller().getProducts().add(p);
+                }
+
                  productFacade.create(p);
             }
 
             response.sendRedirect("/AuctionWeb");
             
         }
-       
+        System.out.println(userPath);
+        if(userPath.equals("/makeBid")){
+            
+            System.out.println("Thing Thing Thing Thing Thing ");
+            
+            double amount = Double.parseDouble(request.getParameter("amount"));
+            Product product = (Product)session.getAttribute("selectedProduct");
+            
+            
+            if(product.getStartingPrice() < amount){
+            
+                Bid b = new Bid(); 
+            
+                b.setAmount(amount);
+                b.setProduct(product);
+                b.setBuyer((AuctionUser) session.getAttribute("user"));
+            
+                bidFacade.create(b);
+                
+                //warning: slow for users with many bids!
+                if(!b.getBuyer().getBids().contains(b)){
+                    b.getBuyer().getBids().add(b);
+                }
+            
+                if(!b.getProduct().getBids().contains(b)){
+                    b.getProduct().getBids().add(b);
+                }
+                
+                product.setStartingPrice(amount);
+            }
+           
+            response.sendRedirect("/AuctionWeb/faces/product.xhtml");
+        }
+        
+        if(userPath.equals("/login")){
+            //TODO
+        }
+        
+        if(userPath.equals("/logout")){
+            session.removeAttribute("user");
+            response.sendRedirect("/AuctionWeb");
+        }
+        
     }
 
     /**
