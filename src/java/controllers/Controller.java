@@ -210,6 +210,7 @@ public class Controller extends HttpServlet {
                 //warning: slow for users with many bids!
                 if(!b.getBuyer().getBids().contains(b)){
                     b.getBuyer().getBids().add(b);
+                    
                 }
             
                 if(!b.getProduct().getBids().contains(b)){
@@ -217,6 +218,7 @@ public class Controller extends HttpServlet {
                 }
                 
                 product.setStartingPrice(amount);
+                productFacade.merge(product);
             }
            
             response.sendRedirect("/AuctionWeb/faces/product.xhtml");
