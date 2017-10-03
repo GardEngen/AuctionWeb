@@ -230,17 +230,18 @@ public class Controller extends HttpServlet {
 
             }
             else { //login success
+                
                 String welcome = "Hello " + u.getName();
                 session.setAttribute("user", u);
                 session.setAttribute("welcomeMessage", welcome);
                 session.removeAttribute("isNotLoggedInError");
                 session.removeAttribute("loginStatusMessage");
 
-
                 try {
                     response.sendRedirect("/AuctionWeb");
                 } catch (Exception e) {
 
+                
                 }
             }
         }
@@ -267,8 +268,9 @@ public class Controller extends HttpServlet {
             AuctionUser a = (AuctionUser) session.getAttribute("user");
             a.setDescription(desc);
             userFacade.merge(a);
+            response.sendRedirect("/AuctionWeb/faces/userPage.xhtml");
         }
-        response.sendRedirect("/AuctionWeb/faces/userPage.xhtml");
+        
 
         if (userPath.equals("/updatePic")) {
 
@@ -282,8 +284,9 @@ public class Controller extends HttpServlet {
             AuctionUser a = (AuctionUser) session.getAttribute("user");
             a.setPic(pic);
             userFacade.merge(a);
+            response.sendRedirect("/AuctionWeb/faces/userPage.xhtml");
         }
-        response.sendRedirect("/AuctionWeb/faces/userPage.xhtml");
+        
     }
 
     /**
