@@ -56,12 +56,13 @@ public class ProductFacade extends AbstractFacade<Product> {
      * Handles conversion from Strings to userful objects.
      */
     public Product createProduct(String name, String startingPrice, String shipsTo,
-                                 String description, String date, String isPublished,
+                                 String description, String imageURL, String date, String isPublished,
                                  AuctionUser seller){
         
         Product p = new Product();
             
             p.setDescription(description);
+            p.setImageURL(imageURL);
             p.setName(name);
             p.setShipsTo(shipsTo);
             

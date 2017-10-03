@@ -44,6 +44,8 @@ public class Product implements Serializable {
     
     private String name;
     private String description;
+    private String imageURL;
+
     private String shipsTo;
     private double startingPrice;
     @OneToMany(mappedBy="product", cascade = CascadeType.PERSIST)
@@ -127,6 +129,15 @@ public class Product implements Serializable {
 
     public Long getId() {
         return id;
+    }
+    
+    
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public void setId(Long id) {
