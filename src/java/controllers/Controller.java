@@ -147,7 +147,7 @@ public class Controller extends HttpServlet {
                 session.setAttribute("nameTakenError", error);
                 response.sendRedirect("/AuctionWeb/faces/register.xhtml");
             } else {
-                response.sendRedirect("/AuctionWeb/faces/userPage.xhtml");
+                response.sendRedirect("/AuctionWeb/faces/index.xhtml");
 
             }
             //AuctionUser u = userFacade.createUser(name, password);
