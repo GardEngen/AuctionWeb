@@ -151,7 +151,10 @@ public class Controller extends HttpServlet {
             userFacade.create(u);
             
             session.setAttribute("user", u);
-            try{
+            if (session.getAttribute("loginStatusMessage") != null) {
+                session.removeAttribute("loginStatusMessage");
+            }
+            try {
                 response.sendRedirect("/AuctionWeb");
             }catch(Exception e){
                 
@@ -235,11 +238,22 @@ public class Controller extends HttpServlet {
             AuctionUser u = loginBean.login(name, password);
             if(u == null){
                 //TODO send "invalid login" to somewhere on client?
-                boolean loginSuccess = false;
-                session.setAttribute("loginSuccess", loginSuccess);
+                //boolean loginSuccess = false;
+                String loginFailedMessage = "Invalid credentials";
+                session.setAttribute("loginStatusMessage", loginFailedMessage);
+                try {
+                    response.sendRedirect("/AuctionWeb");
+                } catch (Exception e) {
+
+                }
             }
             else {
                 session.setAttribute("user", u);
+                //String loginFailedMessage = "";
+                //session.setAttribute("loginStatusMessage", loginFailedMessage);
+                if(session.getAttribute("loginStatusMessage")!= null){
+                    session.removeAttribute("loginStatusMessage");
+                }
                 try {
                     response.sendRedirect("/AuctionWeb");
                 } catch (Exception e) {
