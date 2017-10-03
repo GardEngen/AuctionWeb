@@ -160,8 +160,9 @@ public class Controller extends HttpServlet {
             
             //only logged on users can create products
             if(session.getAttribute("user") == null){
-                response.sendError(401);
-                return;
+                String error = "You need to be logged in to register items";
+                session.setAttribute("isNotLoggedInError", error);
+                response.sendRedirect("/AuctionWeb/faces/registerproduct.xhtml");
             }
             
             String name = request.getParameter("productName");
@@ -218,6 +219,7 @@ public class Controller extends HttpServlet {
                 //boolean loginSuccess = false;
                 String loginFailedMessage = "Invalid credentials";
                 session.setAttribute("loginStatusMessage", loginFailedMessage);
+                session.removeAttribute("isNotLoggedInError");
                 try {
                     response.sendRedirect("/AuctionWeb");
                 } catch (Exception e) {
