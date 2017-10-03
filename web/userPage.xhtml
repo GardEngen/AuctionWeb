@@ -17,7 +17,7 @@
                 <div class="media-body"> 
                     <h3> ${user.name}  </h3>
                     <br/> 
-                    <h5>${user.description}</h5>
+                    <h5>About me: ${user.description}</h5>
                     <br/> 
 
                     <form action="updateD" method="post">  
@@ -35,7 +35,7 @@
                     1 of 2
                     <br/>
                     <ui:repeat value="${user.products}" var="product">
-                        NAME:<h:outputLabel class="textLabel" value="#{product.name}"/>
+                        Product: <h:outputLabel class="textLabel" value="#{product.name}"/>
                         <form action="search" method="get">
                             <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
                             </button>   
@@ -45,7 +45,16 @@
                 <div class="col">
                     2 of 2
                     <br/>
-                    Ratings TODO
+                    <ui:repeat value="${user.bids}" var="bids">
+                        <ui:repeat value="${user.products}" var="product">
+                            Product: <h:outputLabel class="textLabel" value="#{product.name}"/>
+                            Bid: <h:outputLabel class="textLabel" value="#{bids.amount}"/>
+                            <form action="search" method="get">
+                                <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
+                                </button>   
+                            </form>
+                        </ui:repeat>
+                    </ui:repeat>
                 </div>
             </div>
 
