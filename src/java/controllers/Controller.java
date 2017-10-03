@@ -149,7 +149,7 @@ public class Controller extends HttpServlet {
                 response.sendRedirect("/AuctionWeb/faces/register.xhtml");
             }
             else{
-                            response.sendRedirect("/AuctionWeb");
+                            response.sendRedirect("/AuctionWeb/faces/userPage.xhtml");
             }
             //AuctionUser u = userFacade.createUser(name, password);
 
