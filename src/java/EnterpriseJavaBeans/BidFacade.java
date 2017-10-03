@@ -34,14 +34,14 @@ public class BidFacade extends AbstractFacade<Bid> {
     }
     
     public Bid createBid(double amount, Product product, AuctionUser user){
-        if(product.getExpirationDate() == null)
-            return null;
+        if(product.getExpirationDate() != null){
         
-        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        if(product.getExpirationDate().compareTo(date) < 0){
-            return null;
+            java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            if(product.getExpirationDate().compareTo(date) < 0){
+                return null;
+            }
+        
         }
-        
         Bid b = new Bid(); 
             
         b.setAmount(amount);
