@@ -46,15 +46,14 @@
                     2 of 2
                     <br/>
                     <ui:repeat value="${user.bids}" var="bids">
-                        <ui:repeat value="${user.products}" var="product">
-                            Product: <h:outputLabel class="textLabel" value="#{product.name}"/>
-                            Bid: <h:outputLabel class="textLabel" value="#{bids.amount}"/>
-                            <form action="search" method="get">
-                                <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
-                                </button>   
-                            </form>
-                        </ui:repeat>
+                        Product: <h:outputLabel class="textLabel" value="#{bids.product.name}"/>
+                        Bid: <h:outputLabel class="textLabel" value="#{bids.amount}"/>
+                        <form action="search" method="get">
+                            <button type="submit" class="btn btn-primary " value="#{bids.id}" name="bids" >Go To!
+                            </button>   
+                        </form>
                     </ui:repeat>
+
                 </div>
             </div>
 
