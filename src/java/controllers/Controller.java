@@ -15,6 +15,7 @@ import Entities.Product;
 import ManagedBeans.ProductView;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.SessionBean;
@@ -169,17 +170,35 @@ public class Controller extends HttpServlet {
         }
         
         if(userPath.equals("/registerProduct")){
+            //only logged on users can create products
+            if(session.getAttribute("user") == null){
+                response.sendError(401);
+                return;
+            }
+            
             String name = request.getParameter("productName");
-            double startingPrice = Double.parseDouble(request.getParameter("startingPrice"));
+            String startingPrice = request.getParameter("startingPrice");
             String shipsTo = request.getParameter("shipsTo");
             String description = request.getParameter("description");   
-            
+            String date = request.getParameter("expirationDate");
+            String isPublished = request.getParameter("isPublished");
+
             Product p = new Product();
             
             p.setDescription(description);
             p.setName(name);
             p.setShipsTo(shipsTo);
-            p.setStartingPrice(startingPrice);
+            
+            if(isPublished.equals("on"))
+                p.setIsPublished(true);
+            else p.setIsPublished(false);
+            
+            if(!startingPrice.equals(""))
+                p.setStartingPrice(Double.parseDouble(startingPrice));
+            
+            if(!date.equals(""))
+                p.setExpirationDate(Date.valueOf(date));
+           
             
             if(session.getAttribute("user") instanceof AuctionUser){
                 AuctionUser u =  (AuctionUser) session.getAttribute("user");
@@ -198,7 +217,11 @@ public class Controller extends HttpServlet {
         System.out.println(userPath);
         if(userPath.equals("/makeBid")){
             
-            System.out.println("Thing Thing Thing Thing Thing ");
+            //only logged on users can make Bids
+            if(session.getAttribute("user") == null){
+                response.sendError(401);
+                return;
+            }
             
             double amount = Double.parseDouble(request.getParameter("amount"));
             Product product = (Product)session.getAttribute("selectedProduct");
