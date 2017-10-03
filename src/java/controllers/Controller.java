@@ -141,15 +141,14 @@ public class Controller extends HttpServlet {
         if (userPath.equals("/register")) {
             String name = request.getParameter("username");
             String password = request.getParameter("userpass");
-   
             boolean registerSuccess = userFacade.register(name, password);
-            if(!registerSuccess){
+            if (!registerSuccess) {
                 String error = "Username is already taken";
                 session.setAttribute("nameTakenError", error);
                 response.sendRedirect("/AuctionWeb/faces/register.xhtml");
-            }
-            else{
-                            response.sendRedirect("/AuctionWeb/faces/userPage.xhtml");
+            } else {
+                response.sendRedirect("/AuctionWeb/faces/userPage.xhtml");
+
             }
             //AuctionUser u = userFacade.createUser(name, password);
 
@@ -171,12 +170,13 @@ public class Controller extends HttpServlet {
             String startingPrice = request.getParameter("startingPrice");
             String shipsTo = request.getParameter("shipsTo");
             String description = request.getParameter("description");
+            String imageURL = request.getParameter("imageURL");
             String date = request.getParameter("expirationDate");
             String isPublished = request.getParameter("isPublished");
 
             Product p
                     = productFacade.createProduct(name, startingPrice, shipsTo,
-                            description, date, isPublished,
+                            description, imageURL, date, isPublished,
                             (AuctionUser) session.getAttribute("user"));
 
             response.sendRedirect("/AuctionWeb");
@@ -193,7 +193,7 @@ public class Controller extends HttpServlet {
 
             double amount = Double.parseDouble(request.getParameter("amount"));
 
-            Product product = (Product)session.getAttribute("selectedProduct");
+                Product product = (Product)session.getAttribute("selectedProduct");
             
             
             if(product.getStartingPrice() < amount){
@@ -228,10 +228,10 @@ public class Controller extends HttpServlet {
 
                 }
 
-            }
-            else { //login success
+            } else {
                 
                 String welcome = "Hello " + u.getName();
+
                 session.setAttribute("user", u);
                 session.setAttribute("welcomeMessage", welcome);
                 session.removeAttribute("isNotLoggedInError");
@@ -286,7 +286,7 @@ public class Controller extends HttpServlet {
             userFacade.merge(a);
             response.sendRedirect("/AuctionWeb/faces/userPage.xhtml");
         }
-        
+
     }
 
     /**
