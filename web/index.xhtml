@@ -13,7 +13,7 @@
     </h:head>
     <ui:include src="/navBar.xhtml" />  
     <h:body>
-        <h:outputLabel class="textLabel" value="Logged in as: ${user.name}"/>
+      
         
         <f:view>
             <div class="modal-dialog">
@@ -26,13 +26,15 @@
                         <input class="login-form" a:placeholder="Username" type ="text" name="username"/>
                         <h:outputLabel class="textLabel" value="Password:"/>
                         <input class="login-form" a:placeholder="Password" type="password" name="userpass" />
-                        <div class="login-buttons">
-                            <input styleClass="btn btn-lg btn-primary" type="submit" value="login"/>  
+                               <h:outputLabel class="textLabel" style="color: red" value="${loginStatusMessage}"/>
+                       <div class="col-md text-center">
+                            <input Class="btn btn-primary" type="submit" value="Login" style = "margin-right: 20px"/>  
                             <h:link outcome="register">
-                                <button type="button" class="btn btn-lg btn-primary" > Register</button>
+                                <button type="button" class="btn btn-primary" > Register</button>
                             </h:link>
-                            <h:outputLabel class="textLabel" value="${loginStatusMessage}"/>
+                
                         </div>
+                            
                     </form>
                 </div>
             </div>

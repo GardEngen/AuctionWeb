@@ -30,6 +30,17 @@ public class UserFacade extends AbstractFacade<AuctionUser> {
         super(AuctionUser.class);
     }
     
+    public Boolean register(String username, String password){
+        for(AuctionUser u : findAll()){
+            if(u.getName().equals(username)){
+                return false;
+            } 
+        }
+        createUser(username, password);
+        return true;
+
+    }
+    
     public String printUserNames(){
     String out ="";
     for(AuctionUser a : findAll()){

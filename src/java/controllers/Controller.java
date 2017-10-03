@@ -141,12 +141,21 @@ public class Controller extends HttpServlet {
         if (userPath.equals("/register")) {
             String name = request.getParameter("username");
             String password = request.getParameter("userpass");
+   
+            boolean registerSuccess = userFacade.register(name, password);
+            if(!registerSuccess){
+                String error = "Username is already taken";
+                session.setAttribute("nameTakenError", error);
+                response.sendRedirect("/AuctionWeb/faces/register.xhtml");
+            }
+            else{
+                            response.sendRedirect("/AuctionWeb");
+            }
+            //AuctionUser u = userFacade.createUser(name, password);
 
-            AuctionUser u = userFacade.createUser(name, password);
-
-            //can log in user when he registers
             //session.setAttribute("user", u);
-            response.sendRedirect("/AuctionWeb");
+
+
         }//end register
 
         if (userPath.equals("/registerProduct")) {
@@ -209,19 +218,21 @@ public class Controller extends HttpServlet {
                 //boolean loginSuccess = false;
                 String loginFailedMessage = "Invalid credentials";
                 session.setAttribute("loginStatusMessage", loginFailedMessage);
-                session.removeAttribute("isNotLoggedInError");
                 try {
                     response.sendRedirect("/AuctionWeb");
                 } catch (Exception e) {
 
                 }
-            } else {
+
+            }
+            else { //login success
+                String welcome = "Hello " + u.getName();
                 session.setAttribute("user", u);
-                //String loginFailedMessage = "";
-                //session.setAttribute("loginStatusMessage", loginFailedMessage);
-                if (session.getAttribute("loginStatusMessage") != null) {
-                    session.removeAttribute("loginStatusMessage");
-                }
+                session.setAttribute("welcomeMessage", welcome);
+                session.removeAttribute("isNotLoggedInError");
+                session.removeAttribute("loginStatusMessage");
+
+
                 try {
                     response.sendRedirect("/AuctionWeb");
                 } catch (Exception e) {
