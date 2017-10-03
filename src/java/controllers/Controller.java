@@ -192,17 +192,21 @@ public class Controller extends HttpServlet {
             }
 
             double amount = Double.parseDouble(request.getParameter("amount"));
-            Product product = (Product) session.getAttribute("selectedProduct");
 
-            bidFacade.createBid(amount, product, (AuctionUser) session.getAttribute("user"));
+            Product product = (Product)session.getAttribute("selectedProduct");
+            
+            
+            if(product.getStartingPrice() < amount){
+            
+                
+                Bid b =
+                bidFacade.createBid(amount, product, (AuctionUser) session.getAttribute("user"));
+                
+                if(b != null){
+                    productFacade.merge(product);
+                    userFacade.merge((AuctionUser) session.getAttribute("user"));
+                }
 
-            if (product.getStartingPrice() < amount) {
-
-                Bid b
-                        = bidFacade.createBid(amount, product, (AuctionUser) session.getAttribute("user"));
-
-                productFacade.merge(product);
-                userFacade.merge((AuctionUser) session.getAttribute("user"));
             }
 
             response.sendRedirect("/AuctionWeb/faces/product.xhtml");
