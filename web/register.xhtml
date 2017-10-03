@@ -2,49 +2,71 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Registering registry in the register</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
         <link href="register.css" rel="stylesheet" type="text/css"/>
     </h:head>
-    <f:view>
-        <h:form>
-            <h:body>
-                <h:link outcome="index">
-                    <button type="button" class="btn btn-lg btn-primary">Home</button>
-                </h:link>
 
-                <br/>
-                <form action="register" method="post">  
-                    Name:<input type="text" name="username"/><br/><br/>  
-                    Password:<input type="password" name="userpass"/><br/><br/>  
-                    <input type="submit" value="register"/>  
-                </form>
+        <ui:include src="/navBar.xhtml" />   
+        <h:body>
+            <div class="container">
+            <h2>Register</h2>
 
-                <br/>
+            <div class="row main">
+                <div class="col-md-12">
+                   <div class="main-register main-center">
+                        <form  action="register" method="post">
 
-                <div class="signupForm">
-                    <form action="register" method="post">
-                        <div class = "inputField">
-                            Name:<input type="text" name="username"/><br/><br/>  
-                        </div>
+                            <div class="form-group">
 
-                        <div class = "inputField">
-                            Password:<input type="password" name="userpass"/><br/><br/>
-                        </div>
+                                <label for="productName" class="cols-sm-2 control-label">
+                                    Name:
+                                </label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group"></div>
+                                    <input type="text" name="username"  class="form-control" placeholder="Enter your name"/>
+                                </div>
+                            </div>
+                            
+                               <div class="form-group">
 
-                        <div class = "inputField">
-                            Repeat password:<input type="password" name="userpass"/><br/><br/>  
-                        </div>
-                        <input type="submit" value="register"/>  
-                    </form>
-                    <h:outputLabel value="${nameTakenError}"/>
+                                <label for="productName" class="cols-sm-2 control-label">
+                                    Password:
+                                </label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group"></div>
+                                    <input type="password" name="userpass"  class="form-control" placeholder="Enter a password"/>
+                                </div>
+                            </div>
+                            
+                              <div class="form-group">
+
+                                <label for="productName" class="cols-sm-2 control-label">
+                                    Repet Password:
+                                </label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group"></div>
+                                    <input type="password" name="userpass"  class="form-control" placeholder="Enter the same password"/>
+                                </div>
+                            </div>
+                                <h:outputLabel value ="${nameTakenError}" style="color: red"/>
+                            <div class="col-md text-center">
+                                <button type="submit" value="register" class="btn btn-success">
+                                    Submit
+                                </button>
+                            </div>
+                        
+                        </form>
+                    </div>
                 </div>
+            </div>
+        </div>
 
+   
 
-            </h:body>
-        </h:form>
-    </f:view>
+        </h:body>
 </html>
 
