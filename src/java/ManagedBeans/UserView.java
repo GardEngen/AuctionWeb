@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package my.presentation;
+package ManagedBeans;
 
-import boundary.UserFacade;
-import entities.AuctionUser;
+
+import EnterpriseJavaBeans.UserFacade;
+
+import Entities.AuctionUser;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -21,7 +23,9 @@ import javax.enterprise.context.RequestScoped;
 public class UserView {
 
     @EJB
-    private UserFacade userFacade;
+
+        private UserFacade userFacade;
+
     private AuctionUser auctionUser;
 
     /**
@@ -41,10 +45,5 @@ public class UserView {
     
     public int getNumberOfUsers(){
         return userFacade.findAll().size();
-    }
-    
-    public String postUser(){
-        this.userFacade.create(auctionUser);
-        return "theend";
     }
 }
