@@ -11,6 +11,7 @@ import Entities.Bid;
 import Entities.Product;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -42,6 +43,7 @@ public class ProductFacade extends AbstractFacade<Product> {
 
     }
     
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -49,6 +51,12 @@ public class ProductFacade extends AbstractFacade<Product> {
     
     public ProductFacade() {
         super(Product.class);
+    }
+    
+    public List<Product> getAllSorted(){
+        List<Product> a = findAll();
+        Collections.sort(a);
+        return a;
     }
     
     /**

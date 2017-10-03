@@ -12,40 +12,26 @@
     </h:head>
     <ui:include src="/navBar.xhtml" />   
     <h:body>
-        <h:form>
-            <h:inputText value="search" />
-        </h:form>
+        <ui:repeat value="#{productView.allSorted}" var="product">
+            <tr>
+                <td>
+                    <h:outputLabel class="textLabel" value="#{product.name}"/>
+                </td>
+                <td>
+                    <h:outputLabel class="textLabel" value="#{product.shipsTo}"/>
+                </td>
+                <td>
+                    <h:outputLabel class="textLabel" value="#{product.startingPrice}"/>
+                </td>
+                <th>
+                    <form action="search" method="get">
+                        <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
+                        </button>   
+                    </form>
 
-        <div class="signupForm">
+                </th>
+            </tr>
+        </ui:repeat>
 
-            <div class="smallerForm">
-                <h:outputText  value="#{productView.productName}"/> 
-                <br/>
-                <br/>
-                <h:outputText  value="#{productView.productDescription}"/>
-                <br/>
-                <br/>
-                Currently at:
-                <h:outputText value="#{productView.productPrice}"/>
-                kr
-                <br/>
-                Sold By:
-                <h:outputText  value="#{productView.productSeller}"/>
-            </div>
-            <div class="smallerForm">
-                <h:outputText  value="#{productView.productName}"/> 
-                <br/>
-                <br/>
-                <h:outputText  value="#{productView.productDescription}"/>
-                <br/>
-                <br/>
-                Currently at:
-                <h:outputText value="#{productView.productPrice}"/>
-                kr
-                <br/>
-                Sold By:
-                <h:outputText  value="#{productView.productSeller}"/>
-            </div>
-        </div>
     </h:body>
 </html>

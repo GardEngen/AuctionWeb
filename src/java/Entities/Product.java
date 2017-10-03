@@ -30,7 +30,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
  * @author raugz
  */
 @Entity
-public class Product implements Serializable {
+public class Product implements Serializable, Comparable<Product> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -156,6 +156,11 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "entities.Product[ id=" + id + " ]";
+    }
+
+    @Override
+    public int compareTo(Product o) {
+        return Long.compare(id, o.getId());
     }
     
 }

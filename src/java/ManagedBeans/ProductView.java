@@ -8,6 +8,7 @@ package ManagedBeans;
 import EnterpriseJavaBeans.ProductFacade;
 
 import Entities.Product;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -36,6 +37,10 @@ public class ProductView {
      */
     public ProductView() {
         this.product = new Product();
+    }
+    
+    public List<Product> getAllSorted(){
+        return productFacade.getAllSorted();
     }
     
     public int getNumberOfProducts(){
