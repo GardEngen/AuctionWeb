@@ -35,11 +35,11 @@ import javax.servlet.http.HttpSession;
             urlPatterns = {"/Controller",
                             "/index",
                             "/register",
-                            "/amIIn",
                             "/registerProduct",
                             "/search",
                             "/makeBid",
-                            "/login"})
+                            "/login",
+                            "/logout"})
 public class Controller extends HttpServlet {
 
     @EJB
@@ -141,35 +141,23 @@ public class Controller extends HttpServlet {
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
 
+        //Here we register users
         if(userPath.equals("/register")){
             String name = request.getParameter("username");
             String password = request.getParameter("userpass");
             
-            AuctionUser u = new AuctionUser();
-            u.setName(name);
-            u.setPassword(password);
+            AuctionUser u = userFacade.createUser(name, password);
             
-            userFacade.create(u);
-            
-            session.setAttribute("user", u);
-            if (session.getAttribute("loginStatusMessage") != null) {
-                session.removeAttribute("loginStatusMessage");
-            }
-            try {
-                response.sendRedirect("/AuctionWeb");
-            }catch(Exception e){
-                
-            }
-        }
-        
-        if(userPath.equals("/amIIn")){
-            if(session.getAttribute("user") != null){
-                response.sendRedirect("/AuctionWeb/faces/register.xhtml");
-            }
-            else response.sendRedirect("/AuctionWeb/faces/registerproduct.xhtml");
-        }
+
+            //can log in user when he registers
+            //session.setAttribute("user", u);
+
+            response.sendRedirect("/AuctionWeb");
+        }//end register
+
         
         if(userPath.equals("/registerProduct")){
+            
             //only logged on users can create products
             if(session.getAttribute("user") == null){
                 response.sendError(401);
@@ -183,38 +171,16 @@ public class Controller extends HttpServlet {
             String date = request.getParameter("expirationDate");
             String isPublished = request.getParameter("isPublished");
 
-            Product p = new Product();
+                
+            Product p =
+            productFacade.createProduct(name, startingPrice, shipsTo,
+                                        description, date, isPublished,
+                                        (AuctionUser) session.getAttribute("user"));
             
-            p.setDescription(description);
-            p.setName(name);
-            p.setShipsTo(shipsTo);
-            
-            if(isPublished.equals("on"))
-                p.setIsPublished(true);
-            else p.setIsPublished(false);
-            
-            if(!startingPrice.equals(""))
-                p.setStartingPrice(Double.parseDouble(startingPrice));
-            
-            if(!date.equals(""))
-                p.setExpirationDate(Date.valueOf(date));
-           
-            
-            if(session.getAttribute("user") instanceof AuctionUser){
-                AuctionUser u =  (AuctionUser) session.getAttribute("user");
-                p.setSeller(u);
-                 
-                if(!p.getSeller().getProducts().contains(p)){
-                    p.getSeller().getProducts().add(p);
-                }
-
-                 productFacade.create(p);
-            }
-
             response.sendRedirect("/AuctionWeb");
-            
-        }
-        System.out.println(userPath);
+        }//end registerProduct
+        
+        //System.out.println(userPath);
         if(userPath.equals("/makeBid")){
             
             //only logged on users can make Bids
@@ -226,33 +192,21 @@ public class Controller extends HttpServlet {
             double amount = Double.parseDouble(request.getParameter("amount"));
             Product product = (Product)session.getAttribute("selectedProduct");
             
+            bidFacade.createBid(amount, product, (AuctionUser) session.getAttribute("user"));
             
             if(product.getStartingPrice() < amount){
             
-                Bid b = new Bid(); 
-            
-                b.setAmount(amount);
-                b.setProduct(product);
-                b.setBuyer((AuctionUser) session.getAttribute("user"));
-            
-                bidFacade.create(b);
                 
-                //warning: slow for users with many bids!
-                if(!b.getBuyer().getBids().contains(b)){
-                    b.getBuyer().getBids().add(b);
-                    
-                }
-            
-                if(!b.getProduct().getBids().contains(b)){
-                    b.getProduct().getBids().add(b);
-                }
+                Bid b =
+                bidFacade.createBid(amount, product, (AuctionUser) session.getAttribute("user"));
                 
-                product.setStartingPrice(amount);
+                
                 productFacade.merge(product);
+                userFacade.merge((AuctionUser) session.getAttribute("user"));
             }
            
             response.sendRedirect("/AuctionWeb/faces/product.xhtml");
-        }
+        }//end makeBid
         
         if(userPath.equals("/login")){
             String name = request.getParameter("username");

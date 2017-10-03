@@ -37,4 +37,19 @@ public class UserFacade extends AbstractFacade<AuctionUser> {
        }
        return out;
     }
+    
+    //creates a user and adds it to the database
+    public AuctionUser createUser(String name, String password){
+            AuctionUser u = new AuctionUser();
+            u.setName(name);
+            u.setPassword(password);
+            
+            create(u); 
+            
+            return u;
+    }
+    
+    public void merge(AuctionUser u){
+        em.merge(u);
+    }
 }
