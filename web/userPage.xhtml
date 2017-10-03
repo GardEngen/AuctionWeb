@@ -34,8 +34,8 @@
                 <div class="col">
                     1 of 2
                     <br/>
-                    <ui:repeat value="${user.products}" var="products">
-                        <h:outputLabel class="textLabel" value="#{product.name}"/>
+                    <ui:repeat value="${user.products}" var="product">
+                        NAME:<h:outputLabel class="textLabel" value="#{product.name}"/>
                         <form action="search" method="get">
                             <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
                             </button>   
@@ -48,6 +48,7 @@
                     Ratings TODO
                 </div>
             </div>
+
         </f:view>
     </h:body>
 </html>
