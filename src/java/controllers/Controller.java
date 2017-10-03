@@ -146,13 +146,18 @@ public class Controller extends HttpServlet {
             String name = request.getParameter("username");
             String password = request.getParameter("userpass");
             
-            AuctionUser u = userFacade.createUser(name, password);
-            
+            boolean registerSuccess = userFacade.register(name, password);
+            if(!registerSuccess){
+                String error = "Username is already taken";
+                session.setAttribute("nameTakenError", error);
+                response.sendRedirect("/AuctionWeb/faces/register.xhtml");
+            }
+            else{
+                            response.sendRedirect("/AuctionWeb");
+            }
+            //AuctionUser u = userFacade.createUser(name, password);
 
-            //can log in user when he registers
             //session.setAttribute("user", u);
-
-            response.sendRedirect("/AuctionWeb");
         }//end register
 
         
