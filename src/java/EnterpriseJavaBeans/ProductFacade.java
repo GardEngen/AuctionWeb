@@ -9,6 +9,7 @@ import EnterpriseJavaBeans.AbstractFacade;
 import Entities.AuctionUser;
 import Entities.Bid;
 import Entities.Product;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -48,6 +49,43 @@ public class ProductFacade extends AbstractFacade<Product> {
     
     public ProductFacade() {
         super(Product.class);
+    }
+    
+    /**
+     * Creates a product and adds it to the database
+     * Handles conversion from Strings to userful objects.
+     */
+    public Product createProduct(String name, String startingPrice, String shipsTo,
+                                 String description, String date, String isPublished,
+                                 AuctionUser seller){
+        
+        Product p = new Product();
+            
+            p.setDescription(description);
+            p.setName(name);
+            p.setShipsTo(shipsTo);
+            
+            if(isPublished == null)
+                p.setIsPublished(false);
+            else if(isPublished.equals("on"))
+                p.setIsPublished(true);
+            else p.setIsPublished(false);
+            
+            if(!startingPrice.equals(""))
+                p.setStartingPrice(Double.parseDouble(startingPrice));
+            
+            if(!date.equals(""))
+                p.setExpirationDate(Date.valueOf(date));
+           
+            p.setSeller(seller);
+                 
+            if(!p.getSeller().getProducts().contains(p)){
+                p.getSeller().getProducts().add(p);
+            }
+            
+            create(p);
+            return p;
+        
     }
     
     public String printProductNames(){
