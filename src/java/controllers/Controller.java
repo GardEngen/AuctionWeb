@@ -230,10 +230,10 @@ public class Controller extends HttpServlet {
 
                 }
             }
-            else {
+            else { //login success
+                String welcome = "Hello " + u.getName();
                 session.setAttribute("user", u);
-                //String loginFailedMessage = "";
-                //session.setAttribute("loginStatusMessage", loginFailedMessage);
+                session.setAttribute("welcomeMessage", welcome);
                 session.removeAttribute("isNotLoggedInError");
                 session.removeAttribute("loginStatusMessage");
 
