@@ -6,64 +6,48 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:head>
-        <title>User ${user.name}</title>
+        <title>${user.name}</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
-        <link href="navBar.css" rel="stylesheet" type="text/css"/>
     </h:head>
-      <ui:include src="/navBar.xhtml" />   
+    <ui:include src="/navBar.xhtml" />   
     <h:body>
         <f:view>             
-            <h:form>
-                <div class="navbar">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="index.xhtml">Home</a>
-                            </li>
+            <div class="media">
+                <img class="d-flex mr-3" data-src="holder.js/64x64" alt="64x64" style="width: 160px; height: 160px;" src="${user.pic}" data-holder-rendered="true"></img>
+                <div class="media-body"> 
+                    <h3> ${user.name}  </h3>
+                    <br/> 
+                    <h5>${user.description}</h5>
+                    <br/> 
 
-
-                            <li class="nav-item">
-                                <a class="nav-link active" href="userPage.xhtml">Profile</a>
-                            </li>
-
-
-                            <li class="nav-item">
-                                <a class="nav-link active" href="registerproduct.xhtml">Register Product</a>
-                            </li>
-                        </ul>
-                        <form class="form-inline my-2 my-lg-0">
-                            <div class="searchbarLimits">
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search"></input>
-                            </div>
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                            
+                    <form action="updateD" method="post">  
+                        <input type="text" placeholder="Description" name="desc"/> 
+                        <input type="submit" value="Update" />  
+                    </form>
+                </div>
+            </div>
+            <form action="updatePic" method="post">  
+                <input type="text" name="picture" placeholder="Link to picture"/> <br/>
+                <input type="submit" value="Update"/>  
+            </form>
+            <div class="row">
+                <div class="col">
+                    1 of 2
+                    <br/>
+                    <ui:repeat value="${user.products}" var="products">
+                        <h:outputLabel class="textLabel" value="#{product.name}"/>
+                        <form action="search" method="get">
+                            <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
+                            </button>   
                         </form>
-                    </nav>
+                    </ui:repeat>
                 </div>
-
-                <div class="media">
-                    <img class="d-flex mr-3" data-src="holder.js/64x64" alt="64x64" style="width: 160px; height: 160px;" src="https://i.redd.it/omdxvq5q4khz.jpg" data-holder-rendered="true"></img>
-                    <div class="media-body">
-                        <h5 class="mt-0" value=""> 
-                        </h5>
-                        DOTHRAKI HORDES IN AN OPEN FIELD, NED!
-                    </div>
+                <div class="col">
+                    2 of 2
+                    <br/>
+                    Ratings TODO
                 </div>
-                <h:outputLabel value="${user.name}"/>
-                <div class="row">
-                    <div class="col">
-                        1 of 2
-                        <br/>
-                        TODO
-                        Products or somesuch
-                    </div>
-                    <div class="col">
-                        2 of 2
-                        <br/>
-                        Ratings TODO
-                    </div>
-                </div>
-            </h:form>
+            </div>
         </f:view>
     </h:body>
 </html>

@@ -39,7 +39,9 @@ import javax.servlet.http.HttpSession;
             "/search",
             "/makeBid",
             "/login",
-            "/logout"})
+            "/logout",
+            "/updateD",
+            "/updatePic"})
 public class Controller extends HttpServlet {
 
     @EJB
@@ -139,18 +141,20 @@ public class Controller extends HttpServlet {
         if (userPath.equals("/register")) {
             String name = request.getParameter("username");
             String password = request.getParameter("userpass");
-
             boolean registerSuccess = userFacade.register(name, password);
             if (!registerSuccess) {
                 String error = "Username is already taken";
                 session.setAttribute("nameTakenError", error);
                 response.sendRedirect("/AuctionWeb/faces/register.xhtml");
             } else {
-                response.sendRedirect("/AuctionWeb");
+                response.sendRedirect("/AuctionWeb/faces/userPage.xhtml");
+
             }
             //AuctionUser u = userFacade.createUser(name, password);
 
             //session.setAttribute("user", u);
+
+
         }//end register
 
         if (userPath.equals("/registerProduct")) {
@@ -188,17 +192,21 @@ public class Controller extends HttpServlet {
             }
 
             double amount = Double.parseDouble(request.getParameter("amount"));
-            Product product = (Product) session.getAttribute("selectedProduct");
 
-            bidFacade.createBid(amount, product, (AuctionUser) session.getAttribute("user"));
+                Product product = (Product)session.getAttribute("selectedProduct");
+            
+            
+            if(product.getStartingPrice() < amount){
+            
+                
+                Bid b =
+                bidFacade.createBid(amount, product, (AuctionUser) session.getAttribute("user"));
+                
+                if(b != null){
+                    productFacade.merge(product);
+                    userFacade.merge((AuctionUser) session.getAttribute("user"));
+                }
 
-            if (product.getStartingPrice() < amount) {
-
-                Bid b
-                        = bidFacade.createBid(amount, product, (AuctionUser) session.getAttribute("user"));
-
-                productFacade.merge(product);
-                userFacade.merge((AuctionUser) session.getAttribute("user"));
             }
 
             response.sendRedirect("/AuctionWeb/faces/product.xhtml");
@@ -219,10 +227,13 @@ public class Controller extends HttpServlet {
                 } catch (Exception e) {
 
                 }
+
             } else {
+                
+                String welcome = "Hello " + u.getName();
+
                 session.setAttribute("user", u);
-                //String loginFailedMessage = "";
-                //session.setAttribute("loginStatusMessage", loginFailedMessage);
+                session.setAttribute("welcomeMessage", welcome);
                 session.removeAttribute("isNotLoggedInError");
                 session.removeAttribute("loginStatusMessage");
 
@@ -230,6 +241,7 @@ public class Controller extends HttpServlet {
                     response.sendRedirect("/AuctionWeb");
                 } catch (Exception e) {
 
+                
                 }
             }
         }
@@ -242,6 +254,37 @@ public class Controller extends HttpServlet {
                 response.sendRedirect("/AuctionWeb");
                 //response.sendRedirect("/AuctionWeb/faces/registerproduct.xhtml");
             }
+        }
+
+        if (userPath.equals("/updateD")) {
+
+            //only logged on users can make Bids
+            if (session.getAttribute("user") == null) {
+                response.sendError(401);
+                return;
+            }
+
+            String desc = request.getParameter("desc");
+            AuctionUser a = (AuctionUser) session.getAttribute("user");
+            a.setDescription(desc);
+            userFacade.merge(a);
+            response.sendRedirect("/AuctionWeb/faces/userPage.xhtml");
+        }
+        
+
+        if (userPath.equals("/updatePic")) {
+
+            //only logged on users can make Bids
+            if (session.getAttribute("user") == null) {
+                response.sendError(401);
+                return;
+            }
+
+            String pic = request.getParameter("picture");
+            AuctionUser a = (AuctionUser) session.getAttribute("user");
+            a.setPic(pic);
+            userFacade.merge(a);
+            response.sendRedirect("/AuctionWeb/faces/userPage.xhtml");
         }
 
     }
