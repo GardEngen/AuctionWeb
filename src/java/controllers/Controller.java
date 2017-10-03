@@ -219,7 +219,6 @@ public class Controller extends HttpServlet {
                 //boolean loginSuccess = false;
                 String loginFailedMessage = "Invalid credentials";
                 session.setAttribute("loginStatusMessage", loginFailedMessage);
-                session.removeAttribute("isNotLoggedInError");
                 try {
                     response.sendRedirect("/AuctionWeb");
                 } catch (Exception e) {
@@ -230,9 +229,9 @@ public class Controller extends HttpServlet {
                 session.setAttribute("user", u);
                 //String loginFailedMessage = "";
                 //session.setAttribute("loginStatusMessage", loginFailedMessage);
-                if(session.getAttribute("loginStatusMessage")!= null){
-                    session.removeAttribute("loginStatusMessage");
-                }
+                session.removeAttribute("isNotLoggedInError");
+                session.removeAttribute("loginStatusMessage");
+
                 try {
                     response.sendRedirect("/AuctionWeb");
                 } catch (Exception e) {
