@@ -9,6 +9,7 @@ import EnterpriseJavaBeans.AbstractFacade;
 import Entities.AuctionUser;
 import Entities.Bid;
 import Entities.Product;
+import java.util.Calendar;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -33,6 +34,11 @@ public class BidFacade extends AbstractFacade<Bid> {
     }
     
     public Bid createBid(double amount, Product product, AuctionUser user){
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        if(product.getExpirationDate().compareTo(date) < 0){
+            return null;
+        }
+        
         Bid b = new Bid(); 
             
         b.setAmount(amount);

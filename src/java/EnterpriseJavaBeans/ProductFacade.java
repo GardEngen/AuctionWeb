@@ -157,7 +157,7 @@ public class ProductFacade extends AbstractFacade<Product> {
         List<Product> resultList = new ArrayList();
         for (Product tempProd : listOfAllProducts) {
 
-            if (tempProd.getName().toLowerCase().contains(searchObject.toLowerCase())) {
+            if (tempProd.getName().toLowerCase().contains(searchObject.toLowerCase()) && tempProd.isIsPublished()) {
                 System.out.println("********Jeg legger til " + tempProd.getName());
                 resultList.add(tempProd);
             }
